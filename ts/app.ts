@@ -6,7 +6,7 @@ declare var angular;
 declare var _;
 declare var cordova;
 declare var StatusBar;
-declare var gapi;
+declare var OAuth;
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
@@ -32,7 +32,6 @@ angular.module('starter', [
     'gutscheinapp.services.identity'
 ])
     .config(function ($provide) {
-
         $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
             return function (exception, cause) {
                 //var $rootScope = $injector.get("$rootScope");
@@ -44,6 +43,11 @@ angular.module('starter', [
                 $delegate(exception, cause);
             };
         });
+
+    })
+    .run(function () {
+        OAuth.initialize('eRvbHpnoDZTB0zwIaZseLgVZfyQ');
+
 
     })
     .run(function ($ionicPlatform) {
@@ -83,21 +87,20 @@ angular.module('starter', [
         $ionicModal.fromTemplateUrl('templates/_login.html', {
             scope: $rootScope
         }).then(function (modal) {
-                $rootScope.modal = modal;
+            $rootScope.modal = modal;
 
-                // Open the login modal
-                $rootScope.login = function () {
+            // Open the login modal
+            $rootScope.login = function () {
 
-                  
 
-                    $rootScope.modal.show();
-                };
+                $rootScope.modal.show();
+            };
 
-                // Triggered in the login modal to close it
-                $rootScope.closeLogin = function () {
-                    $rootScope.modal.hide();
-                };
-            });
+            // Triggered in the login modal to close it
+            $rootScope.closeLogin = function () {
+                $rootScope.modal.hide();
+            };
+        });
 
     })
     .run(function ($state, $rootScope, $urlRouter, USER_ROLES, identity, $ionicModal) {

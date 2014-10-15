@@ -1,4 +1,6 @@
-﻿angular.module('gutscheinapp.factory.GoogleplusFactory', []).factory('GoogleplusFactory', function ($rootScope, $q, $window, $http) {
+﻿/// <reference path="../app.ts"/>
+
+angular.module('gutscheinapp.factory.GoogleplusFactory', []).factory('GoogleplusFactory', function ($rootScope, $q, $window, $http) {
     // Check https://developers.google.com/+/api/oauth
     // https://developers.google.com/+/web/api/javascript
     var tokenStore = window.sessionStorage, login, api, revokePermissions;

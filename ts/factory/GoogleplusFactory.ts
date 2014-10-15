@@ -1,4 +1,4 @@
-﻿
+﻿/// <reference path="../app.ts"/>
 declare var googleapi;
 
 angular.module('gutscheinapp.factory.GoogleplusFactory', [])

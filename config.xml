@@ -39,11 +39,8 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
-    <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.4.0">
-        <param name="APP_ID" value="797691880296264" />
-        <param name="APP_NAME" value="GausmannMedia" />
-    </gap:plugin>
     <gap:plugin name="com.ionic.keyboard" version="1.0.3" />
+    <gap:plugin name="com.oauthio.plugins.oauthio" version="0.2.4" />
     <gap:plugin name="com.phonegap.plugins.barcodescanner" version="2.0.0" />
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/icon-36-ldpi.png" />
