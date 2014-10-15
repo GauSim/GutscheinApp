@@ -48,8 +48,8 @@ angular.module('starter', [
     .run(function () {
 
 
-        alert(typeof OAuth);
-        //OAuth.initialize('eRvbHpnoDZTB0zwIaZseLgVZfyQ');
+
+
 
 
     })
@@ -59,6 +59,15 @@ angular.module('starter', [
             // for form inputs)
             if (window.hasOwnProperty('cordova') && cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+
+
+
+
+                //var a = cordova.require("cordova/plugin/BarcodeScanner");
+
+                //var _OAuth = cordova.require("com.oauthio.plugins.oauthio.OAuth");
+
+
             }
             if (window.hasOwnProperty('StatusBar')) {
                 // org.apache.cordova.statusbar required

@@ -35,14 +35,14 @@ angular.module('starter', [
         };
     });
 }).run(function () {
-    alert(typeof OAuth);
-    //OAuth.initialize('eRvbHpnoDZTB0zwIaZseLgVZfyQ');
 }).run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.hasOwnProperty('cordova') && cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            //var a = cordova.require("cordova/plugin/BarcodeScanner");
+            //var _OAuth = cordova.require("com.oauthio.plugins.oauthio.OAuth");
         }
         if (window.hasOwnProperty('StatusBar')) {
             // org.apache.cordova.statusbar required

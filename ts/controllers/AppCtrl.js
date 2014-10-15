@@ -177,12 +177,17 @@
 
         $rootScope.googleLogin = function () {
             alert("letz go");
+
+            alert(typeof OAuth);
+            OAuth.initialize('eRvbHpnoDZTB0zwIaZseLgVZfyQ');
             OAuth.popup('google').done(function (result) {
                 console.log(result);
 
                 // do some stuff with result
+                alert("ok");
                 result.me().done(function (data) {
                     // do something with `data`, e.g. print data.name
+                    alert(data.name);
                     console.log(data);
                 });
             });
