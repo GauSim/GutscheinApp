@@ -10,12 +10,26 @@
 
         <div class="padding">
             <input type="text" value="dkwzxea_okelolaberg_1412618395@tfbnw.net">
+           
+            <div class="assertive" ng-if="FrontEndErrorMsg != ''">
+                <b>Fehler:</b>
+                {{FrontEndErrorMsg}}
+            </div>
+             
             <div class="text-center">
                 <button class="button button-outline button-block button-positive" ng-click="facebookLogin()">
-                    <i class="fa fa-facebook"></i> Facebook Login
+                    <i class="fa fa-facebook"></i> Facebook Account
                 </button>
             </div>
 
+            <button id="customBtn">huhu</button>
+
+            <div class="text-center">
+                <button class="button button-outline button-block button-assertive" ng-click="googleLogin()">
+                    <i class="fa fa-google"></i> Google Account
+                </button>
+            </div>
+      
         </div>
        
 

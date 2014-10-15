@@ -1,4 +1,4 @@
-/// <reference path="./models/Gutschein.ts"/>
+﻿/// <reference path="./models/Gutschein.ts"/>
 /// <reference path="./services/GutscheinService.ts"/>
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
@@ -15,6 +15,7 @@ angular.module('starter', [
     'gutscheinapp.services.AppConfig',
     'gutscheinapp.services.DevicesLocationService',
     'gutscheinapp.factory.QRCodeFactory',
+    'gutscheinapp.factory.GoogleplusFactory',
     'gutscheinapp.controllers.AppCtrl',
     'gutscheinapp.controllers.WelcomeCtrl',
     'gutscheinapp.controllers.SettingsCtrl',

@@ -26,10 +26,15 @@
     cordova plugin add org.apache.cordova.geolocation
     cordova plugin add org.apache.cordova.inappbrowser
     -->
-
+    <script>function GooglePlusReadysigninCallback(data) { alert(data); }</script>
+    <script>function GooglePlusReady() { alert("google ist da"); }</script>
+    <!--<script src="https://apis.google.com/js/plus.js?onload=GooglePlusReady"></script>-->
+    <script src="https://apis.google.com/js/client:plus.js?onload=GooglePlusReady"></script>
+   
     <!-- your app's js -->
     <script src="ts/factory/openfb-angular.js"></script>
     <script src="ts/factory/QRCodeFactory.js"></script>
+    <script src="ts/factory/GoogleplusFactory.js"></script>
     <script src="ts/models/Gutschein.js"></script>
     <script src="ts/constants/constants.js"></script>
     <script src="ts/services/identity.js"></script>

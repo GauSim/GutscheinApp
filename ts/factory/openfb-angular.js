@@ -1,4 +1,4 @@
-/**
+﻿/**
 * OpenFB is a micro-library that lets you integrate your JavaScript application with Facebook.
 * OpenFB works for both BROWSER-BASED apps and CORDOVA/PHONEGAP apps.
 * This library has no dependency: You don't need (and shouldn't use) the Facebook SDK with this library. Whe running in
@@ -61,12 +61,13 @@ angular.module('openfb', []).factory('OpenFB', function ($rootScope, $q, $window
                 if (index > 0) {
                     oauthRedirectURL = document.location.href.substring(0, index) + 'oauthcallback.html';
                 } else {
-                    return alert("Can't reliably infer the OAuth redirect URI. Please specify it explicitly in openFB.init()");
+                    deferredLogin.reject({ error: "Can't reliably infer the OAuth redirect URI. Please specify it explicitly in openFB.init()" });
                 }
             }
         }
 
-        loginWindow = window.open(FB_LOGIN_URL + '?client_id=' + fbAppId + '&redirect_uri=' + oauthRedirectURL + '&response_type=token&display=popup&scope=' + fbScope, '_blank', 'location=no');
+        if (oauthRedirectURL)
+            loginWindow = window.open(FB_LOGIN_URL + '?client_id=' + fbAppId + '&redirect_uri=' + oauthRedirectURL + '&response_type=token&display=popup&scope=' + fbScope, '_blank', 'location=no');
 
         // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
         if (runningInCordova) {
@@ -200,4 +201,3 @@ function oauthCallback(url) {
         OpenFB.oauthCallback(url);
     });
 }
-//# sourceMappingURL=openfb-angular.js.map

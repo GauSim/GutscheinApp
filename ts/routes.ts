@@ -1,4 +1,4 @@
-/**
+/** 
  * Created by Simon on 04.10.14.
  */ 
 /// <reference path="./app.ts"/>
@@ -10,6 +10,8 @@
 
 
     app.config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
+
+       
         $stateProvider
 
             .state('app', {

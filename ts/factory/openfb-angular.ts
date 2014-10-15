@@ -15,20 +15,20 @@ angular.module('openfb', [])
 
         var FB_LOGIN_URL = 'https://www.facebook.com/dialog/oauth',
 
-        // By default we store fbtoken in sessionStorage. This can be overriden in init()
+            // By default we store fbtoken in sessionStorage. This can be overriden in init()
             tokenStore = window.sessionStorage,
 
             fbAppId,
             oauthRedirectURL,
 
-        // Because the OAuth login spans multiple processes, we need to keep the success/error handlers as variables
-        // inside the module instead of keeping them local within the login function.
+            // Because the OAuth login spans multiple processes, we need to keep the success/error handlers as variables
+            // inside the module instead of keeping them local within the login function.
             deferredLogin,
 
-        // Indicates if the app is running inside Cordova
+            // Indicates if the app is running inside Cordova
             runningInCordova,
 
-        // Used in the exit event handler to identify if the login has already been processed elsewhere (in the oauthCallback function)
+            // Used in the exit event handler to identify if the login has already been processed elsewhere (in the oauthCallback function)
             loginProcessed;
 
         document.addEventListener("deviceready", function () {
@@ -59,7 +59,7 @@ angular.module('openfb', [])
             deferredLogin = $q.defer();
 
             if (!fbAppId) {
-                return deferredLogin.reject({error: 'Facebook App Id not set.'});
+                return deferredLogin.reject({ error: 'Facebook App Id not set.' });
             }
 
             var loginWindow;
@@ -81,13 +81,14 @@ angular.module('openfb', [])
                     if (index > 0) {
                         oauthRedirectURL = document.location.href.substring(0, index) + 'oauthcallback.html';
                     } else {
-                        return alert("Can't reliably infer the OAuth redirect URI. Please specify it explicitly in openFB.init()");
+                        deferredLogin.reject({ error: "Can't reliably infer the OAuth redirect URI. Please specify it explicitly in openFB.init()" });
                     }
                 }
             }
 
-            loginWindow = window.open(FB_LOGIN_URL + '?client_id=' + fbAppId + '&redirect_uri=' + oauthRedirectURL +
-                '&response_type=token&display=popup&scope=' + fbScope, '_blank', 'location=no');
+            if (oauthRedirectURL)
+                loginWindow = window.open(FB_LOGIN_URL + '?client_id=' + fbAppId + '&redirect_uri=' + oauthRedirectURL +
+                    '&response_type=token&display=popup&scope=' + fbScope, '_blank', 'location=no');
 
             // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
             if (runningInCordova) {
@@ -101,7 +102,7 @@ angular.module('openfb', [])
 
                 loginWindow.addEventListener('exit', function () {
                     // Handle the situation where the user closes the login window manually before completing the login process
-                    deferredLogin.reject({error: 'user_cancelled', error_description: 'User cancelled login process', error_reason: "user_cancelled"});
+                    deferredLogin.reject({ error: 'user_cancelled', error_description: 'User cancelled login process', error_reason: "user_cancelled" });
                 });
             }
             // Note: if the app is running in the browser the loginWindow dialog will call back by invoking the
@@ -151,7 +152,7 @@ angular.module('openfb', [])
          * @returns {*}
          */
         function revokePermissions() {
-            return api({method: 'DELETE', path: '/me/permissions'})
+            return api({ method: 'DELETE', path: '/me/permissions' })
                 .success(function () {
                     console.log('Permissions revoked');
                 });
@@ -171,7 +172,7 @@ angular.module('openfb', [])
 
             params['access_token'] = tokenStore['fbtoken'];
 
-            return $http({method: method, url: 'https://graph.facebook.com' + obj.path, params: params})
+            return $http({ method: method, url: 'https://graph.facebook.com' + obj.path, params: params })
                 .error(function (data, status, headers, config) {
                     if (data.error && data.error.type === 'OAuthException') {
                         $rootScope.$emit('OAuthException');
@@ -186,7 +187,7 @@ angular.module('openfb', [])
          * @returns {*}
          */
         function post(path, params) {
-            return api({method: 'POST', path: path, params: params});
+            return api({ method: 'POST', path: path, params: params });
         }
 
         /**
@@ -196,7 +197,7 @@ angular.module('openfb', [])
          * @returns {*}
          */
         function get(path, params) {
-            return api({method: 'GET', path: path, params: params});
+            return api({ method: 'GET', path: path, params: params });
         }
 
         function parseQueryString(queryString) {
