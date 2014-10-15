@@ -46,7 +46,10 @@ angular.module('starter', [
 
     })
     .run(function () {
-        OAuth.initialize('eRvbHpnoDZTB0zwIaZseLgVZfyQ');
+
+
+        alert(typeof OAuth);
+        //OAuth.initialize('eRvbHpnoDZTB0zwIaZseLgVZfyQ');
 
 
     })

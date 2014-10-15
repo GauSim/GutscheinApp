@@ -35,7 +35,8 @@ angular.module('starter', [
         };
     });
 }).run(function () {
-    OAuth.initialize('eRvbHpnoDZTB0zwIaZseLgVZfyQ');
+    alert(typeof OAuth);
+    //OAuth.initialize('eRvbHpnoDZTB0zwIaZseLgVZfyQ');
 }).run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
