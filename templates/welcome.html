@@ -1,0 +1,63 @@
+<ion-view title="{{Headline}}">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+        <h1 class="title"></h1>
+
+        <button class="button" ng-show="showNextButton" ng-click="nextSlide()">
+            <i class=" fa fa-caret-square-o-right"></i>
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="has-header welcome-background">
+        <!-- {{Headline}} -->
+
+        <ion-slide-box on-slide-changed="slideHasChanged($index)">
+            <ion-slide>
+                <div class="box padding-horizontal">
+
+                    <i class="fa fa-yelp padding-horizontal" style="font-size: 120px;"></i>
+
+                    <h1>Hallo & Willkommen</h1>
+
+                    <p style="margin-top:20px;">
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                        ut l
+                    </p>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div class="box padding-horizontal">
+
+                    <i class="fa fa-qrcode padding-horizontal" style="font-size: 120px;"></i>
+
+                    <h1>So geht's!</h1>
+
+                    <p>Lorem ipsum dolor sit amet <b>Einchecken oder Barcode Scannen</b> consetetur sadipsci</p>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div class="box padding-horizontal">
+                    <i class="fa fa-tags padding-horizontal" style="font-size: 120px;"></i>
+
+                    <h1>Auf geht's!</h1>
+
+                    <p>Lorem ipsum dolor sit amet,<b>Gutseine & Geld sparen</b> consetetur sadipscing elitr, </p>
+
+                    <div class="text-center" style="padding:20px">
+                        <button class="button button-block button-light" ng-click=" login()">
+                            <!--<i class="fa fa-facebook " style="color:#fff"></i>-->Einloggen
+                        </button>
+                    </div>
+
+
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+
+
+    </ion-content>
+    <div class="bar bar-footer bar-light pointer" ng-click=" login()">
+        <div class="title">
+            Einloggen
+        </div>
+    </div>
+</ion-view>

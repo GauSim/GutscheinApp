@@ -1,0 +1,34 @@
+<div class="modal">
+    <ion-header-bar>
+        <h1 class="title">Check-In Locations</h1>
+
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeLogin()">Close</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+
+
+        <div class="list">
+            <div class="item item-divider">
+                In deiner Nähe
+            </div>
+            <div class="item" ng-show="!Locations">
+                Loading ...
+            </div>
+            <a class="item" ng-repeat=" item in Locations.data" ng-click="LocationSelect(item)">
+                {{item.name}}
+
+                <br/>
+                <small>
+                    {{item.location.street}}<br/>
+                    {{item.location.zip}}
+                    {{item.location.city}}
+                </small>
+
+            </a>
+        </div>
+
+    </ion-content>
+</div>
+

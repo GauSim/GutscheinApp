@@ -1,0 +1,64 @@
+/* Empty. Add your own CSS if you like */
+
+.welcome-background {
+    background-image: url('../img/welomebg.jpg');
+    background-position: top center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+/* ------------------------ Welcome Screen ---------------------------*/
+.box {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 100px;
+    color: #fff;
+    text-shadow: 1px 1px 1px #1B1B1B;
+}
+
+    .box h1 {
+        margin-top: 30px;
+        color: #fff;
+        text-shadow: 1px 1px 1px #1B1B1B;
+    }
+
+    .box p {
+        color: #f2f2f2;
+        text-shadow: 1px 1px 1px #1B1B1B;
+    }
+
+/* ------------------------ Generell ---------------------------*/
+.padding {
+    padding: 10px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+
+.numberin {
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgb(228, 228, 228);
+    float: left;
+    margin-right: 10px;
+}
+

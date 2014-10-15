@@ -1,0 +1,47 @@
+<ion-side-menus>
+
+    <ion-pane ion-side-menu-content>
+        <ion-nav-bar class="bar-energized nav-title-slide-ios7">
+            <ion-nav-back-button class="button-clear">
+                <i class="icon ion-ios7-arrow-back"></i> Back
+            </ion-nav-back-button>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+    </ion-pane>
+
+    <ion-side-menu side="left">
+        <header class="bar bar-header bar-energized">
+            <h1 class="title">
+                <span ng-show="identity.IsAuthenticated"> Hi {{identity.User.Firstname}}</span>
+                <span ng-show="!identity.IsAuthenticated"> {{APPCONFIG.Name}} </span>
+            </h1>
+        </header>
+        <ion-content class="has-header">
+            <ion-list>
+                <ion-item nav-clear menu-close ng-show="!identity.IsAuthenticated" href="#/app/Welcome">
+                    <i class="fa fa-yelp"></i>&nbsp;&nbsp;Welcome
+                </ion-item>
+                <ion-item nav-clear menu-close ng-show="!identity.IsAuthenticated" ng-click="login()">
+                    <i class="fa fa-user"></i>&nbsp;&nbsp;Login
+                </ion-item>
+                <ion-item nav-clear menu-close ng-show="identity.IsAuthenticated" href="#/app/MeineGutscheine">
+                    <i class="fa fa-list"></i>&nbsp;&nbsp;Meine Gutscheine
+                </ion-item>
+                <ion-item nav-clear menu-close ng-show="identity.IsAuthenticated" href="#/app/AddGutscheine">
+                    <i class="fa fa-plus"></i>&nbsp;&nbsp;Gutscheine Hinzufügen
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/Settings">
+                    <i class="fa fa-cog"></i>&nbsp;&nbsp;Einstellungen
+                </ion-item>
+            </ion-list>
+            <div class="text-center padding">
+                <span style="color:#dcdcdc; ">
+                    {{APPCONFIG.Version}}<br />
+                    {{APPCONFIG.CopyrightInfo}}<br />
+                    <a style="color:#dcdcdc; font-size:10px" href="{{APPCONFIG.CopyrightUrl}}" target="_blank">{{APPCONFIG.CopyrightUrl}}</a>
+                </span>
+            </div>
+
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

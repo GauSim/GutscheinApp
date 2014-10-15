@@ -1,0 +1,47 @@
+<ion-view title="Gutschein" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-chevron-left"
+                ng-click="goback()"></button>
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+        <h1 class="title"></h1>
+
+    </ion-nav-buttons>
+    <ion-content class="has-header">
+        <div ng-show="Gutschein">
+
+
+            <div class="list card" ng-click="Entwerten()">
+                <div class="item item-divider">
+                    <h2>{{Gutschein.Owner}}</h2>
+                </div>
+
+                <div class="item item-image text-center" style="background-color:black;">
+                    <img ng-if="Valid(Gutschein)" ng-src="{{Gutschein.ImageUrlSmall}}">
+                </div>
+                <div class="item text-center">
+                    <div class="padding-horizontal">
+                        <button class="button button-assertive button-block" ng-click="deleteGutscheinListe()">
+                            Entwerten
+                        </button>
+                    </div>
+                </div>
+                <div class="item item-text-wrap text-center">
+                    <h2>{{Gutschein.Title}}</h2>
+
+                    <p>{{Gutschein.Description}}</p>
+                    <p>Gutschein Id: {{Gutschein.Id}}</p>
+                </div>
+                <a class="item assertive text-center" href="#">
+                    <span ng-if="!Gutschein.AllwaysVaild">{{ValidUntilDisplayText(Gutschein)}} {{Valid(Gutschein)}}</span>
+                    <span ng-if="Gutschein.AllwaysVaild"> Läuft nie ab.</span>
+                </a>
+            </div>
+
+        </div>
+        <div ng-show="!Gutschein">
+            <h1>...</h1>
+        </div>
+
+
+    </ion-content>
+</ion-view>

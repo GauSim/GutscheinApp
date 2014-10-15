@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="lib/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/underscore/underscore-min.js"></script>
+    <script src="lib/momentjs/moment-with-locales.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+
+    <!--
+    cordova plugin add org.apache.cordova.geolocation
+    cordova plugin add org.apache.cordova.inappbrowser
+    -->
+
+    <!-- your app's js -->
+    <script src="ts/factory/openfb-angular.js"></script>
+    <script src="ts/factory/QRCodeFactory.js"></script>
+    <script src="ts/models/Gutschein.js"></script>
+    <script src="ts/constants/constants.js"></script>
+    <script src="ts/services/identity.js"></script>
+    <script src="ts/services/AppConfig.js"></script>
+    <script src="ts/routes.js"></script>
+    <script src="ts/services/StorageService.js"></script>
+    <script src="ts/services/GutscheinService.js"></script>
+    <script src="ts/services/DevicesLocationService.js"></script>
+    <script src="ts/controllers/AppCtrl.js"></script>
+    <script src="ts/controllers/SettingsCtrl.js"></script>
+    <script src="ts/controllers/AddGutscheinCtrl.js"></script>
+    <script src="ts/controllers/WelcomeCtrl.js"></script>
+    <script src="ts/controllers/MeineGutscheineListeCtrl.js"></script>
+    <script src="ts/controllers/GutscheinDetailCtrl.js"></script>
+    <script src="ts/app.js"></script>
+</head>
+
+<body ng-app="starter">
+<ion-nav-view id="main"></ion-nav-view>
+</body>
+</html>
