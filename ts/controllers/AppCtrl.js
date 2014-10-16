@@ -2,6 +2,82 @@
 (function () {
     var app = angular.module('gutscheinapp.controllers.AppCtrl', ['gutscheinapp.services.identity']);
 
+    app.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $state, identity, $rootScope, OpenFB, googleapi, FACEBOOKSETTINGS, APPCONFIG, EVENTS) {
+        //identity.create();
+        $rootScope.identity = identity;
+        $rootScope.APPCONFIG = APPCONFIG;
+
+        // Form data for the login modal
+        $scope.loginData = {};
+
+        // window.sessionStorage['fbtoken']
+        function onLoginDone() {
+            $scope.closeLogin();
+            $state.go('app.AddGutscheine', null, { inherit: false, relative: null });
+        }
+
+        $rootScope.$on(EVENTS.LOGIN, function () {
+            $state.go('app.AddGutscheine', null, { inherit: false, relative: null });
+        });
+
+        // Perform the login action when the user submits the login form
+        $rootScope.doLogin = function () {
+            console.log('Doing login', $scope.loginData);
+
+            // Simulate a login delay. Remove this and replace with your login
+            // code if using a login system
+            $timeout(function () {
+                identity.create();
+                onLoginDone();
+            }, 1000);
+        };
+
+        $rootScope.FrontEndErrorMsg = "";
+
+        $rootScope.show_googleLoginButton = (typeof OAuth === "undefined") ? false : true;
+        $rootScope.googleLogin = function () {
+            $rootScope.FrontEndErrorMsg = "";
+
+            alert("letz go");
+            OAuth.initialize('eRvbHpnoDZTB0zwIaZseLgVZfyQ');
+            OAuth.popup('google').done(function (result) {
+                //OAuth.io provider
+                console.log(result);
+
+                // do some stuff with result
+                alert("ok");
+                result.me().done(function (data) {
+                    // do something with `data`, e.g. print data.name
+                    alert(data.name);
+                    console.log(data);
+                });
+            }).fail(function (error) {
+                if (error) {
+                    $rootScope.FrontEndErrorMsg = error;
+                } else {
+                    $rootScope.FrontEndErrorMsg = "Login fehlgeschlagen ...";
+                }
+            });
+        };
+
+        $rootScope.facebookLogin = function () {
+            $rootScope.FrontEndErrorMsg = "";
+
+            OpenFB.login(FACEBOOKSETTINGS.Scope).then(function () {
+                OpenFB.get('/me').success(function (FaceBookUser) {
+                    identity.create(FaceBookUser);
+                    onLoginDone();
+                });
+            }, function (e) {
+                if (e && e.error) {
+                    $rootScope.FrontEndErrorMsg = e.error;
+                } else {
+                    $rootScope.FrontEndErrorMsg = "Login fehlgeschlagen ...";
+                }
+            });
+        };
+    });
+
     app.factory('googleapi', function ($rootScope, $q, $window, $http) {
         var _runningInCordova;
         document.addEventListener("deviceready", function () {
@@ -141,110 +217,6 @@
         };
 
         return self;
-    });
-
-    app.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $state, identity, $rootScope, OpenFB, googleapi, FACEBOOKSETTINGS, APPCONFIG, EVENTS) {
-        //identity.create();
-        $rootScope.identity = identity;
-        $rootScope.APPCONFIG = APPCONFIG;
-
-        // Form data for the login modal
-        $scope.loginData = {};
-
-        // window.sessionStorage['fbtoken']
-        function onLoginDone() {
-            $scope.closeLogin();
-            $state.go('app.AddGutscheine', null, { inherit: false, relative: null });
-        }
-
-        $rootScope.$on(EVENTS.LOGIN, function () {
-            $state.go('app.AddGutscheine', null, { inherit: false, relative: null });
-        });
-
-        // Perform the login action when the user submits the login form
-        $rootScope.doLogin = function () {
-            console.log('Doing login', $scope.loginData);
-
-            // Simulate a login delay. Remove this and replace with your login
-            // code if using a login system
-            $timeout(function () {
-                identity.create();
-                onLoginDone();
-            }, 1000);
-        };
-
-        $rootScope.FrontEndErrorMsg = "";
-
-        $rootScope.googleLogin = function () {
-            alert("letz go");
-
-            alert(typeof OAuth);
-            OAuth.initialize('eRvbHpnoDZTB0zwIaZseLgVZfyQ');
-            OAuth.popup('google').done(function (result) {
-                console.log(result);
-
-                // do some stuff with result
-                alert("ok");
-                result.me().done(function (data) {
-                    // do something with `data`, e.g. print data.name
-                    alert(data.name);
-                    console.log(data);
-                });
-            });
-        };
-
-        $rootScope.googleLogin2 = function () {
-            // // https://console.developers.google.com/
-            var client_id = '1045383240578-bfkp9gcufmp0gk1146pf6giji7r0bt4h.apps.googleusercontent.com';
-            var client_secret = 'WOMtjZ7cvTAeRRcZA2Fy_iEn';
-
-            //var redirect_uri = oauthRedirectURL; //'http://192.168.178.36:3000';//'http://localhost';
-            var scope = 'https://www.googleapis.com/auth/plus.me';
-
-            // Do Login
-            googleapi.getToken({
-                client_id: client_id,
-                client_secret: client_secret
-            }).then(function () {
-                //Show the greet view if we get a valid token
-                $rootScope.FrontEndErrorMsg = ("Show the greet view if we get a valid token");
-            }, function () {
-                //Show the login view if we have no valid token
-                authorize();
-            });
-
-            function authorize() {
-                googleapi.authorize({
-                    client_id: client_id,
-                    client_secret: client_secret,
-                    //redirect_uri: redirect_uri,
-                    scope: scope
-                }).then(function () {
-                    //Show the greet view if access is granted
-                    $rootScope.FrontEndErrorMsg = "Show the greet view if access is granted";
-                }, function (data) {
-                    //Show an error message if access was denied
-                    $rootScope.FrontEndErrorMsg = data.error;
-                });
-            }
-        };
-
-        $rootScope.facebookLogin = function () {
-            $rootScope.FrontEndErrorMsg = "";
-
-            OpenFB.login(FACEBOOKSETTINGS.Scope).then(function () {
-                OpenFB.get('/me').success(function (FaceBookUser) {
-                    identity.create(FaceBookUser);
-                    onLoginDone();
-                });
-            }, function (e) {
-                if (e && e.error) {
-                    $rootScope.FrontEndErrorMsg = e.error;
-                } else {
-                    $rootScope.FrontEndErrorMsg = "Login fehlgeschlagen ...";
-                }
-            });
-        };
     });
 })();
 //# sourceMappingURL=AppCtrl.js.map

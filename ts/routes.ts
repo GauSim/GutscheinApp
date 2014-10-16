@@ -73,6 +73,9 @@
                         templateUrl: "templates/GutscheinDetail.html",
                         controller: 'GutscheinDetailCtrl'
                     }
+                },
+                data: {
+                    authorizedRoles: [USER_ROLES.user]
                 }
             })
             .state('app.Settings', {

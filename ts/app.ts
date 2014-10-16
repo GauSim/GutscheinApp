@@ -46,12 +46,7 @@ angular.module('starter', [
 
     })
     .run(function () {
-
-
-
-
-
-
+        moment.lang('de-DE');
     })
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {

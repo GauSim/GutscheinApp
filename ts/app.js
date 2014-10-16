@@ -1,4 +1,4 @@
-/// <reference path="./models/Gutschein.ts"/>
+﻿/// <reference path="./models/Gutschein.ts"/>
 /// <reference path="./services/GutscheinService.ts"/>
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
@@ -35,6 +35,7 @@ angular.module('starter', [
         };
     });
 }).run(function () {
+    moment.lang('de-DE');
 }).run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

@@ -1,4 +1,4 @@
-﻿/**
+/**
 * OpenFB is a micro-library that lets you integrate your JavaScript application with Facebook.
 * OpenFB works for both BROWSER-BASED apps and CORDOVA/PHONEGAP apps.
 * This library has no dependency: You don't need (and shouldn't use) the Facebook SDK with this library. Whe running in
@@ -201,3 +201,4 @@ function oauthCallback(url) {
         OpenFB.oauthCallback(url);
     });
 }
+//# sourceMappingURL=openfb-angular.js.map

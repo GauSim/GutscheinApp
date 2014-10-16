@@ -1,4 +1,4 @@
-/**
+﻿/**
 * Created by Simon on 04.10.14.
 */
 /// <reference path="./app.ts"/>
@@ -60,6 +60,9 @@
                     templateUrl: "templates/GutscheinDetail.html",
                     controller: 'GutscheinDetailCtrl'
                 }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.user]
             }
         }).state('app.Settings', {
             url: "/Settings",
