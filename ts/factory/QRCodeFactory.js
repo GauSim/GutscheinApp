@@ -7,23 +7,29 @@
 (function () {
     var app = angular.module('gutscheinapp.factory.QRCodeFactory', []);
 
-    app.factory('QRCodeFactory', function ($q) {
+    app.factory('QRCodeFactory', function ($q, $http) {
         var self = this;
 
-        self.scan = function () {
+        self.getFromServer = function (obj) {
             var q = $q.defer();
 
-            //
-            //alert(typeof sanner);
-            //sanner.scan(q.resolve, q.reject);
-            q.reject({ error: 'BarcodeScanner Plugin not found' });
+            // http://kunden.gausmann-media.de/GutscheinApp/gutschein.php?Id=999&AddDays=1
+            var url = "http://kunden.gausmann-media.de/GutscheinApp/gutschein.php?";
+            url += "Id=" + obj.Id;
+            url += "&AddDays=" + 0;
+            console.log(url);
 
-            //
-            // returns :
-            // result.text
-            // result.format
+            $http.get(url).success(function (RawGutschein, status, headers, config) {
+                q.resolve(new Gutschein(RawGutschein));
+            }).error(function (data, status, headers, config) {
+                q.reject();
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+
             return q.promise;
         };
+
         self.decode = function (Input) {
             var q = $q.defer();
 
@@ -57,7 +63,7 @@
         var _inst = {
             decode: self.decode,
             encode: self.encode,
-            scan: self.scan
+            getFromServer: self.getFromServer
         };
         return _inst;
     });

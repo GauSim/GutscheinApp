@@ -29,7 +29,7 @@
         CopyrightInfo: 'by Gausmann-Media',
         CopyrightUrl: 'http://www.gausmann-media.de',
         CreatedBy: 'Simon Gausmann',
-        Version: "V0.1.1"
+        Version: "V0.1.1.1"
     });
 
 })

@@ -4,7 +4,7 @@
 (function () {
     var app = angular.module('gutscheinapp.controllers.GutscheinDetailCtrl', []);
 
-    app.controller('GutscheinDetailCtrl', function ($scope, $ionicModal, $ionicPopup, GutscheinService, $rootScope, GutscheinId, OpenFB, $state) {
+    app.controller('GutscheinDetailCtrl', function ($scope, $ionicModal, $ionicPopup, GutscheinService, $rootScope, GutscheinId, OpenFB, $state, identity) {
         console.log(GutscheinId);
 
         $scope.Gutschein = GutscheinService.getById(GutscheinId);
@@ -23,24 +23,31 @@
             // Do FB Post
             // http://ionicframework.com/docs/api/service/$ionicPopup/
             function doit() {
+                if (identity.User.FacebookId) {
+                    poston_facebook();
+                }
+
+                if (identity.User.GoogleId) {
+                    poston_google();
+                }
+
                 GutscheinService.deleteById(GutscheinId);
                 $state.go("app.MeineGutscheine");
             }
 
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Gutschein Entwerten',
-                template: 'Are you sure you want to eat this ice cream?'
+                title: 'Gutschein Entwerten & Löschen',
+                template: 'Bist du dir sicher, dass du diesen Gutschein Entwerten und Löschen möchtest ? '
             });
             confirmPopup.then(function (res) {
-                if (res) {
+                if (res)
                     doit();
-                } else {
+                else
                     console.log('You are not sure');
-                }
             });
         };
 
-        $scope.postonfacebook = function () {
+        var poston_facebook = function () {
             var msg = {
                 message: "hi",
                 link: "https://www.facebook.com/City.Friseur.Osnabrueck"
@@ -50,6 +57,10 @@
             }).error(function (data) {
                 alert(data.error.message);
             });
+        };
+
+        var poston_google = function () {
+            alert("Google API todo");
         };
     });
 })();

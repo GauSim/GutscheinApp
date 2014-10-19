@@ -8,10 +8,10 @@
     app.controller('SettingsCtrl', function ($scope, GutscheinService, $rootScope, OpenFB, APPCONFIG) {
         $scope.Headline = "Einstellungen";
 
-        $scope.GutscheinListe = GutscheinService.getList();
+        $scope.GutscheinListe = GutscheinService.getListAll();
         $scope.deleteGutscheinListe = function () {
             GutscheinService.deleteAll();
-            $scope.GutscheinListe = GutscheinService.getList();
+            $scope.GutscheinListe = GutscheinService.getListAll();
         };
 
         $scope.logoff = function () {

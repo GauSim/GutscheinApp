@@ -28,7 +28,7 @@
 
         $scope.Headline = "Add";
 
-        $scope.GutscheinListe = GutscheinService.getList();
+        $scope.GutscheinListe = GutscheinService.getListAll();
 
 
         $scope.add = function () {
@@ -38,7 +38,7 @@
                 GutscheinService.add(_gt);
             }
 
-            $scope.GutscheinListe = GutscheinService.getList();
+            $scope.GutscheinListe = GutscheinService.getListAll();
             console.log($scope.GutscheinListe);
         }
 

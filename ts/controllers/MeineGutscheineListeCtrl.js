@@ -11,20 +11,15 @@
 
     app.controller('MeineGutscheineListeCtrl', function ($scope, $state, GutscheinService) {
         $scope.Headline = "Gutschein App";
+        $scope.moment = moment;
+        $scope.MeineGutscheine = GutscheinService.getListValid();
 
-        $scope.MeineGutscheine = GutscheinService.GutscheinListe;
-
-        $scope.Valid = function (Gutschein) {
-            return (Gutschein.AllwaysVaild || moment(Gutschein.ValidUntil) >= moment());
-        };
-        $scope.ValidUntilDisplayText = function (Gutschein) {
-            if ($scope.Valid(Gutschein))
-                return moment(Gutschein.ValidUntil).fromNow();
-            else
-                return "abgelaufen";
-        };
         $scope.gotoDetail = function (Gutschein) {
             $state.go('app.GutscheinDetail', { GutscheinId: Gutschein.Id }, { inherit: true });
+        };
+
+        $scope.ShowNotice = function (Gutschein) {
+            moment(Gutschein.ValidUntil) >= moment();
         };
     });
 })();

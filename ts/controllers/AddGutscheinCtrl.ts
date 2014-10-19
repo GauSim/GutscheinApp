@@ -28,6 +28,8 @@ interface AddGutscheineCtrl {
 
     LocationSelect(item:FB_Location);
 
+    $apply(func:any);
+
 }
 interface FB_Location {
     name:string;
@@ -45,7 +47,7 @@ interface FB_Location {
     app.controller('AddGutscheineCtrl2', function ($scope) {
     });
 
-    app.controller('AddGutscheineCtrl', function ($scope:AddGutscheineCtrl, $q, GutscheinService:iGutscheinService, DevicesLocationService, $ionicModal, QRCodeFactory:iQRCodeFactory, OpenFB) {
+    app.controller('AddGutscheineCtrl', function ($scope:AddGutscheineCtrl, $q, GutscheinService:iGutscheinService, DevicesLocationService, $ionicModal, QRCodeFactory:iQRCodeFactory, OpenFB, $state) {
 
         var Scanner;
         $scope.ScanButton = false;
@@ -66,7 +68,7 @@ interface FB_Location {
         }
 
         $scope.Headline = "Add";
-        $scope.GutscheinListe = GutscheinService.getList();
+        $scope.GutscheinListe = GutscheinService.getListAll();
         $ionicModal.fromTemplateUrl('templates/_LocationList.html', {
             scope: $scope,
             animation: 'slide-in-up'
@@ -75,16 +77,20 @@ interface FB_Location {
         });
 
         $scope.add = function () {
+
+
             for (var i = 0; i < 2; i++) {
-                var _gt = new Gutschein({
-                    Id: Math.floor((Math.random() * 1000) + 1),
-                    Title: "30% auf den Gesamt Einkauf_" + i,
-                    ValidUntil: moment().add(5 * (i+1), 'minutes').toISOString()
-                });
-                GutscheinService.add(_gt);
+
+
+                var rndID = Math.floor((Math.random() * 1000) + 1);
+                QRCodeFactory.getFromServer(new Gutschein({Id: rndID}))
+                    .then(function (Gutschein:Gutschein) {
+                        GutscheinService.add(Gutschein);
+                        $scope.GutscheinListe = GutscheinService.getListAll();
+                    });
             }
-            $scope.GutscheinListe = GutscheinService.getList();
-            console.log($scope.GutscheinListe);
+
+
         }
 
 
@@ -100,12 +106,13 @@ interface FB_Location {
                             console.log(Gutschein);
 
                             GutscheinService.add(Gutschein);
-                            $scope.GutscheinListe = GutscheinService.getList();
+                            $scope.GutscheinListe = GutscheinService.getListAll();
 
                             console.log(QRCodeFactory.encode(Gutschein));
 
                             $scope.modal.hide();
                         }, function (error) {
+                            alert(JSON.stringify(error));
                             console.log(error);
 
                             $scope.modal.hide();
@@ -127,15 +134,16 @@ interface FB_Location {
             function tryScann() {
                 try {
                     Scanner.scan(function (obj) {
-                        QRCodeFactory.decode(obj.text).then(function (result:Gutschein) {
+                        QRCodeFactory.decode(obj.text).then(QRCodeFactory.getFromServer).then(function (result:Gutschein) {
                             //alert(result.Title);
-                            $scope.GutscheinListe = GutscheinService.getList();
+                            $scope.GutscheinListe = GutscheinService.getListAll();
                             GutscheinService.add(result);
                             done();
+                            $state.go("app.MeineGutscheine");
 
                         }, function (e) {
                             console.log(e);
-                            done("Code konnte nicht gelesen werden");
+                            done("Code konnte nicht erkannt");
                         });
                     }, function (error) {
                         console.log(error.error);

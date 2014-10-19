@@ -5,9 +5,7 @@
     <ion-content class="has-header">
         <div class="card" ng-if="MeineGutscheine.length == 0">
             <div class="item item-text-wrap text-center">
-                Keine Elemente Gefunden
-
-
+                Keine gültigen Gutscheine gefunden.
                 <button ui-sref="app.AddGutscheine" class="button button-block button-positive">
                     Gutschein hinzufügen
                 </button>
@@ -18,7 +16,7 @@
 
 
             <div class="list card"
-                 ng-repeat="Gutschein in MeineGutscheine | filter : Valid"
+                 ng-repeat="Gutschein in MeineGutscheine"
                  ng-click="gotoDetail(Gutschein)">
                 <div class="item item-divider">
                     <h2>
@@ -33,14 +31,13 @@
                 </div>
                 <a class="item energized" href="#">
                     <span ng-if="!Gutschein.AllwaysVaild">
-                       Läuft ab {{ValidUntilDisplayText(Gutschein)}}
+                       Läuft ab {{moment(Gutschein.ValidUntil).fromNow()}}
                     </span>
                     <span ng-if="Gutschein.AllwaysVaild">
                         Läuft nie ab.
                     </span>
                 </a>
             </div>
-
 
 
         </div>

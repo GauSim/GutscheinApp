@@ -8,10 +8,14 @@
 
 interface MeineGutscheineListeCtrl {
     Headline:string;
+    moment: any;
     MeineGutscheine:Gutschein[];
     Valid(Gutschein:Gutschein):boolean;
     ValidUntilDisplayText(Gutschein:Gutschein):string;
+    ShowNotice(Gutschein:Gutschein);
+
     gotoDetail(Gutschein:Gutschein);
+
 
 }
 
@@ -21,23 +25,21 @@ interface MeineGutscheineListeCtrl {
     app.controller('MeineGutscheineListeCtrl', function ($scope:MeineGutscheineListeCtrl, $state, GutscheinService:iGutscheinService) {
 
         $scope.Headline = "Gutschein App";
+        $scope.moment = moment;
+        $scope.MeineGutscheine = GutscheinService.getListValid();
 
-        $scope.MeineGutscheine = GutscheinService.GutscheinListe
 
 
-        $scope.Valid = function (Gutschein:Gutschein) {
-            return (Gutschein.AllwaysVaild || moment(Gutschein.ValidUntil) >= moment());
-        }
-        $scope.ValidUntilDisplayText = function (Gutschein) {
-            if ($scope.Valid(Gutschein))
-                return moment(Gutschein.ValidUntil).fromNow();
-            else
-                return "abgelaufen";
-        };
+
+
         $scope.gotoDetail = function (Gutschein:Gutschein) {
             $state.go('app.GutscheinDetail', { GutscheinId: Gutschein.Id }, { inherit: true });
         }
 
+
+        $scope.ShowNotice = function (Gutschein:Gutschein) {
+            moment(Gutschein.ValidUntil) >= moment();
+        }
     })
 })();
 

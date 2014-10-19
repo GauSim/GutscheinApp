@@ -4,13 +4,12 @@
 declare var moment;
 
 
-
 class Gutschein {
 
     Id:string;
 
-    ImageUrlSmall:string = "http://placehold.it/250x250";
-    ImageUrlBig:string = "http://placehold.it/250x250";
+    ImageUrlSmall:string = "http://www.gausmann-media.de/kunden/GutscheinApp/demogutschein.jpg";
+    ImageUrlBig:string = "http://www.gausmann-media.de/kunden/GutscheinApp/demogutschein.jpg";
 
     Title:string = "Lorem ipsum dolor sit amet, consetetur sadipscing "; // 50 Zeichen
     Owner:string = "Cube Media Gutschein"; // 30 Zeichen
@@ -57,26 +56,4 @@ class Gutschein {
 
 }
 
-function Gutschein2(parameters) {
-    var id = parameters.id;
-    var title = parameters.title;
 
-    this.Id = id;
-
-    this.ImageUrlSmall = "http://placehold.it/200x200"; // 150x80px
-    this.ImageUrlBig = "http://placehold.it/250x250"; // 250x250px
-
-    this.Title = title; // 50 Zeichen
-    this.Owner = "GausmannMedia"; // 30 Zeichen
-    this.Description = ""; // 500 Zeichen
-
-    this.ValidUntil = moment().add(5 * (id), 'minutes').toISOString(); // "2014-09-08T08:02:17-05:00" (ISO 8601)
-
-    this.AllwaysVaild = false;
-    this.UseTimes = 1; // Einmal benutzbar.
-
-    this.PostMessage = "Ich habe den Gutschein benutzt.";
-
-    this.isDeleted = null // moment() Gutschein bereits entwertet?
-    this.CreateDate = moment().toISOString();
-}

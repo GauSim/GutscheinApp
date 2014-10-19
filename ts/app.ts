@@ -1,5 +1,6 @@
 /// <reference path="./models/Gutschein.ts"/>
 /// <reference path="./services/GutscheinService.ts"/>
+/// <reference path="./services/identity.ts"/>
 
 
 declare var angular;
@@ -19,7 +20,6 @@ angular.module('starter', [
     'gutscheinapp.routes',
     'gutscheinapp.services.StorageService',
     'gutscheinapp.services.GutscheinService',
-    'gutscheinapp.services.AppConfig',
     'gutscheinapp.services.DevicesLocationService',
     'gutscheinapp.factory.QRCodeFactory',
     'gutscheinapp.factory.GoogleplusFactory',
@@ -46,16 +46,18 @@ angular.module('starter', [
 
     })
     .run(function () {
-        moment.lang('de-DE');
+        moment.locale('de-DE');
     })
     .run(function ($ionicPlatform) {
+
+
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.hasOwnProperty('cordova') && cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 
-
+                $ionicPlatform.showStatusBar(false);
 
 
                 //var a = cordova.require("cordova/plugin/BarcodeScanner");

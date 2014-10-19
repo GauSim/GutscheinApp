@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Created by Simon on 04.10.14.
 */
 /// <reference path="./app.ts"/>

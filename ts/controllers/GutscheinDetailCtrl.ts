@@ -5,14 +5,14 @@ interface GutscheinDetailCtrl {
     Gutschein: Gutschein;
     goback();
     postonfacebook();
-    Valid(Gutschein: Gutschein): boolean
+    Valid(Gutschein:Gutschein): boolean
     Entwerten();
 }
 
 (function () {
     var app = angular.module('gutscheinapp.controllers.GutscheinDetailCtrl', []);
 
-    app.controller('GutscheinDetailCtrl', function ($scope: GutscheinDetailCtrl, $ionicModal, $ionicPopup, GutscheinService: iGutscheinService, $rootScope, GutscheinId, OpenFB, $state) {
+    app.controller('GutscheinDetailCtrl', function ($scope:GutscheinDetailCtrl, $ionicModal, $ionicPopup, GutscheinService:iGutscheinService, $rootScope, GutscheinId, OpenFB, $state, identity:iidentity) {
 
         console.log(GutscheinId);
 
@@ -24,40 +24,41 @@ interface GutscheinDetailCtrl {
             $state.go("app.MeineGutscheine");
         }
 
-        $scope.Valid = function (Gutschein: Gutschein) {
+        $scope.Valid = function (Gutschein:Gutschein) {
             return (Gutschein.AllwaysVaild || moment(Gutschein.ValidUntil) >= moment());
         }
 
-
-
         $scope.Entwerten = function () {
-
             // Do FB Post
             // http://ionicframework.com/docs/api/service/$ionicPopup/
             function doit() {
+
+
+                if (identity.User.FacebookId) {
+                    poston_facebook();
+                }
+
+                if (identity.User.GoogleId) {
+                    poston_google();
+                }
+
                 GutscheinService.deleteById(GutscheinId);
                 $state.go("app.MeineGutscheine");
             }
 
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Gutschein Entwerten',
-                template: 'Are you sure you want to eat this ice cream?'
+                title: 'Gutschein Entwerten & Löschen',
+                template: 'Bist du dir sicher, dass du diesen Gutschein Entwerten und Löschen möchtest ? '
             });
-            confirmPopup.then(function (res: boolean) {
-                if (res) {
+            confirmPopup.then(function (res:boolean) {
+                if (res)
                     doit();
-                } else {
+                else
                     console.log('You are not sure');
-                }
             });
-
-
-
-
-
         };
 
-        $scope.postonfacebook = function () {
+        var poston_facebook = function () {
             var msg = {
                 message: "hi",
                 link: "https://www.facebook.com/City.Friseur.Osnabrueck"
@@ -70,6 +71,11 @@ interface GutscheinDetailCtrl {
                     alert(data.error.message);
                 });
         };
+
+        var poston_google = function () {
+
+            alert("Google API todo");
+        }
 
 
     });

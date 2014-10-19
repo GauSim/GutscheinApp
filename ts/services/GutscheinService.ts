@@ -1,4 +1,4 @@
-/** 
+/**
  * Created by Simon on 04.10.14.
  */
 /// <reference path="../app.ts"/>
@@ -6,7 +6,8 @@
 interface iGutscheinService {
 
     GutscheinListe:Gutschein[];
-    getList():Gutschein[];
+    getListAll():Gutschein[];
+    getListValid():Gutschein[];
     add(Gutschein:Gutschein):void;
     deleteAll():void;
     getById(GutscheinId:string):Gutschein
@@ -23,13 +24,31 @@ interface iGutscheinService {
         self.GutscheinListe = qry ? qry : [];
 
 
-        self.getList = function () {
+        self.getListAll = function () {
             var rslt:Gutschein[] = _.sortBy(self.GutscheinListe, function (Gutschein) {
-                return Gutschein.ValidUntil
+                return Gutschein.Owner
             });
             return rslt;
         }
+
+
+        self.getListValid = function () {
+            var rslt:Gutschein[] = _.filter(self.getListAll(), function (Gutschein) {
+                return (Gutschein.AllwaysVaild || moment(Gutschein.ValidUntil) >= moment());
+            });
+            return rslt;
+
+        }
+
         self.add = function (Gutschein:Gutschein) {
+
+            var check = _.find(self.getListAll(), function (Item:Gutschein) {
+                return Item.Id == Gutschein.Id;
+            });
+
+            if (check)
+                return;
+
             self.GutscheinListe.push(Gutschein);
             StorageService.save(StorageService.keys.GutscheinListe, self.GutscheinListe);
         }

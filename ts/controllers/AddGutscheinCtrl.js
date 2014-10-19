@@ -9,7 +9,7 @@
     app.controller('AddGutscheineCtrl2', function ($scope) {
     });
 
-    app.controller('AddGutscheineCtrl', function ($scope, $q, GutscheinService, DevicesLocationService, $ionicModal, QRCodeFactory, OpenFB) {
+    app.controller('AddGutscheineCtrl', function ($scope, $q, GutscheinService, DevicesLocationService, $ionicModal, QRCodeFactory, OpenFB, $state) {
         var Scanner;
         $scope.ScanButton = false;
         if (window.hasOwnProperty('cordova')) {
@@ -26,7 +26,7 @@
         }
 
         $scope.Headline = "Add";
-        $scope.GutscheinListe = GutscheinService.getList();
+        $scope.GutscheinListe = GutscheinService.getListAll();
         $ionicModal.fromTemplateUrl('templates/_LocationList.html', {
             scope: $scope,
             animation: 'slide-in-up'
@@ -36,15 +36,12 @@
 
         $scope.add = function () {
             for (var i = 0; i < 2; i++) {
-                var _gt = new Gutschein({
-                    Id: Math.floor((Math.random() * 1000) + 1),
-                    Title: "30% auf den Gesamt Einkauf_" + i,
-                    ValidUntil: moment().add(5 * (i + 1), 'minutes').toISOString()
+                var rndID = Math.floor((Math.random() * 1000) + 1);
+                QRCodeFactory.getFromServer(new Gutschein({ Id: rndID })).then(function (Gutschein) {
+                    GutscheinService.add(Gutschein);
+                    $scope.GutscheinListe = GutscheinService.getListAll();
                 });
-                GutscheinService.add(_gt);
             }
-            $scope.GutscheinListe = GutscheinService.getList();
-            console.log($scope.GutscheinListe);
         };
 
         $scope.scan = function () {
@@ -56,12 +53,13 @@
                         console.log(Gutschein);
 
                         GutscheinService.add(Gutschein);
-                        $scope.GutscheinListe = GutscheinService.getList();
+                        $scope.GutscheinListe = GutscheinService.getListAll();
 
                         console.log(QRCodeFactory.encode(Gutschein));
 
                         $scope.modal.hide();
                     }, function (error) {
+                        alert(JSON.stringify(error));
                         console.log(error);
 
                         $scope.modal.hide();
@@ -82,14 +80,15 @@
             function tryScann() {
                 try  {
                     Scanner.scan(function (obj) {
-                        QRCodeFactory.decode(obj.text).then(function (result) {
+                        QRCodeFactory.decode(obj.text).then(QRCodeFactory.getFromServer).then(function (result) {
                             //alert(result.Title);
-                            $scope.GutscheinListe = GutscheinService.getList();
+                            $scope.GutscheinListe = GutscheinService.getListAll();
                             GutscheinService.add(result);
                             done();
+                            $state.go("app.MeineGutscheine");
                         }, function (e) {
                             console.log(e);
-                            done("Code konnte nicht gelesen werden");
+                            done("Code konnte nicht erkannt");
                         });
                     }, function (error) {
                         console.log(error.error);

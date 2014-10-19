@@ -7,7 +7,7 @@
 
 interface iQRCodeFactory {
     decode(Input:string):any;
-    scan();
+    getFromServer(obj:Gutschein);
     encode(obj:Gutschein):string;
 }
 
@@ -16,32 +16,48 @@ interface iQRCodeFactory {
     var app = angular.module('gutscheinapp.factory.QRCodeFactory', []);
 
 
-    app.factory('QRCodeFactory', function ($q) {
+    app.factory('QRCodeFactory', function ($q, $http) {
 
         var self:iQRCodeFactory = this;
 
-        self.scan = function () {
+
+        self.getFromServer = function (obj) {
+
+
             var q = $q.defer();
+            // http://kunden.gausmann-media.de/GutscheinApp/gutschein.php?Id=999&AddDays=1
+
+            var url = "http://kunden.gausmann-media.de/GutscheinApp/gutschein.php?";
+            url += "Id=" + obj.Id;
+            url += "&AddDays=" + 0;
+            console.log(url);
 
 
-            //
-            //alert(typeof sanner);
+            $http.get(url).
+                success(function (RawGutschein, status, headers, config) {
 
-            //sanner.scan(q.resolve, q.reject);
 
-            q.reject({error: 'BarcodeScanner Plugin not found'});
-            //
-            // returns :
-            // result.text
-            // result.format
+                    q.resolve(new Gutschein(RawGutschein));
+
+                }).
+                error(function (data, status, headers, config) {
+
+                    q.reject();
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+
 
             return q.promise;
         }
+
         self.decode = function (Input:string) {
 
             var q = $q.defer();
 
             var obj = new Gutschein({});
+
+            //self.getFromServer(obj);
 
             try {
                 var Pairs = Input.split(";");
@@ -75,7 +91,7 @@ interface iQRCodeFactory {
         var _inst:iQRCodeFactory = {
             decode: self.decode,
             encode: self.encode,
-            scan: self.scan
+            getFromServer: self.getFromServer
         }
         return _inst;
     });

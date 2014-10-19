@@ -10,13 +10,28 @@
         var qry = StorageService.get(StorageService.keys.GutscheinListe);
         self.GutscheinListe = qry ? qry : [];
 
-        self.getList = function () {
+        self.getListAll = function () {
             var rslt = _.sortBy(self.GutscheinListe, function (Gutschein) {
-                return Gutschein.ValidUntil;
+                return Gutschein.Owner;
             });
             return rslt;
         };
+
+        self.getListValid = function () {
+            var rslt = _.filter(self.getListAll(), function (Gutschein) {
+                return (Gutschein.AllwaysVaild || moment(Gutschein.ValidUntil) >= moment());
+            });
+            return rslt;
+        };
+
         self.add = function (Gutschein) {
+            var check = _.find(self.getListAll(), function (Item) {
+                return Item.Id == Gutschein.Id;
+            });
+
+            if (check)
+                return;
+
             self.GutscheinListe.push(Gutschein);
             StorageService.save(StorageService.keys.GutscheinListe, self.GutscheinListe);
         };

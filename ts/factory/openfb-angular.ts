@@ -86,9 +86,16 @@ angular.module('openfb', [])
                 }
             }
 
+            var windowsettings ='location=no';
+            windowsettings = 'toolbar=yes,closebuttoncaption=Back,presentationstyle=formsheet,toolbarposition=top,clearsessioncache=yes,clearcache=yes';
+
             if (oauthRedirectURL)
                 loginWindow = window.open(FB_LOGIN_URL + '?client_id=' + fbAppId + '&redirect_uri=' + oauthRedirectURL +
-                    '&response_type=token&display=popup&scope=' + fbScope, '_blank', 'location=no');
+                    '&response_type=token&display=popup&scope=' + fbScope, '_blank', windowsettings);
+
+
+
+            //
 
             // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
             if (runningInCordova) {

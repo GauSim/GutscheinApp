@@ -1,5 +1,6 @@
-﻿/// <reference path="./models/Gutschein.ts"/>
+/// <reference path="./models/Gutschein.ts"/>
 /// <reference path="./services/GutscheinService.ts"/>
+/// <reference path="./services/identity.ts"/>
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
@@ -12,7 +13,6 @@ angular.module('starter', [
     'gutscheinapp.routes',
     'gutscheinapp.services.StorageService',
     'gutscheinapp.services.GutscheinService',
-    'gutscheinapp.services.AppConfig',
     'gutscheinapp.services.DevicesLocationService',
     'gutscheinapp.factory.QRCodeFactory',
     'gutscheinapp.factory.GoogleplusFactory',
@@ -35,13 +35,15 @@ angular.module('starter', [
         };
     });
 }).run(function () {
-    moment.lang('de-DE');
+    moment.locale('de-DE');
 }).run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.hasOwnProperty('cordova') && cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+
+            $ionicPlatform.showStatusBar(false);
             //var a = cordova.require("cordova/plugin/BarcodeScanner");
             //var _OAuth = cordova.require("com.oauthio.plugins.oauthio.OAuth");
         }
