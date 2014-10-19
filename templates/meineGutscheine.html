@@ -16,26 +16,42 @@
 
 
             <div class="list card"
+
                  ng-repeat="Gutschein in MeineGutscheine"
                  ng-click="gotoDetail(Gutschein)">
-                <div class="item item-divider">
+                <a class="item item-avatar" style="background-color: #f5f5f5;">
+                    <img ng-src="{{Gutschein.ImageUrlSmall}}">
+
                     <h2>
                         {{Gutschein.Owner}}
+
                     </h2>
-                </div>
+
+                    <p>
+                        <span ng-if="!Gutschein.AllwaysVaild" style="font-size: 9px; line-height: 7px;">{{moment(Gutschein.ValidUntil).format("dddd, MMMM Do YYYY, H:mm:ss");}}</span>
+                    </p>
+                </a>
 
 
-                <div ng-if="Gutschein.Title != ''" class="item item-text-wrap text-center">
-                    <h2>{{Gutschein.Title}}</h2>
+                <a ng-if="Gutschein.Title != ''" class="item item-text-wrap text-center">
 
-                </div>
-                <a class="item energized" href="#">
-                    <span ng-if="!Gutschein.AllwaysVaild">
-                       Läuft ab {{moment(Gutschein.ValidUntil).fromNow()}}
-                    </span>
-                    <span ng-if="Gutschein.AllwaysVaild">
+                    <img ng-src="{{Gutschein.ImageUrlBig}}">
+
+                    <p ng-class="{assertive: ShowNotice(Gutschein)}">{{Gutschein.Title}}</p>
+
+
+                </a>
+                <a class="item"
+                   ng-class="{assertive: ShowNotice(Gutschein)}">
+                    <div ng-if="!Gutschein.AllwaysVaild">
+                        <i class="fa fa-clock-o pull-left"
+                           style="font-size: 25px;margin-top: 9px;margin-right:10px; margin-bottom: 10px;"></i>
+                        <span style="font-size: 12px; line-height: 7px;">Läuft ab {{moment(Gutschein.ValidUntil).fromNow()}}.</span><br/>
+                        <span style="font-size: 9px; line-height: 7px;">{{moment(Gutschein.ValidUntil).format("dddd, Do MMMM  YYYY, H:mm:ss");}}</span>
+                    </div>
+                    <div ng-if="Gutschein.AllwaysVaild">
                         Läuft nie ab.
-                    </span>
+                    </div>
                 </a>
             </div>
 

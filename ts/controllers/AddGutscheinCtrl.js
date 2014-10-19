@@ -25,7 +25,7 @@
                 } };
         }
 
-        $scope.Headline = "Add";
+        $scope.Headline = "QR-Code";
         $scope.GutscheinListe = GutscheinService.getListAll();
         $ionicModal.fromTemplateUrl('templates/_LocationList.html', {
             scope: $scope,

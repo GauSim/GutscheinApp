@@ -10,7 +10,7 @@
     var app = angular.module('gutscheinapp.controllers.MeineGutscheineListeCtrl', []);
 
     app.controller('MeineGutscheineListeCtrl', function ($scope, $state, GutscheinService) {
-        $scope.Headline = "Gutschein App";
+        $scope.Headline = "Meine Gutscheine";
         $scope.moment = moment;
         $scope.MeineGutscheine = GutscheinService.getListValid();
 
@@ -19,7 +19,7 @@
         };
 
         $scope.ShowNotice = function (Gutschein) {
-            moment(Gutschein.ValidUntil) >= moment();
+            return !(moment(Gutschein.ValidUntil) >= moment().add(1, 'day')) && !Gutschein.AllwaysVaild;
         };
     });
 })();

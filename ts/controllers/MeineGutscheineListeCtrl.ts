@@ -24,7 +24,7 @@ interface MeineGutscheineListeCtrl {
 
     app.controller('MeineGutscheineListeCtrl', function ($scope:MeineGutscheineListeCtrl, $state, GutscheinService:iGutscheinService) {
 
-        $scope.Headline = "Gutschein App";
+        $scope.Headline = "Meine Gutscheine";
         $scope.moment = moment;
         $scope.MeineGutscheine = GutscheinService.getListValid();
 
@@ -38,7 +38,7 @@ interface MeineGutscheineListeCtrl {
 
 
         $scope.ShowNotice = function (Gutschein:Gutschein) {
-            moment(Gutschein.ValidUntil) >= moment();
+          return !(moment(Gutschein.ValidUntil) >= moment().add(1, 'day')) && !Gutschein.AllwaysVaild;
         }
     })
 })();

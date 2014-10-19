@@ -84,10 +84,8 @@ angular.module('starter', [
     });
 }).run(function ($state, $rootScope, $urlRouter, USER_ROLES, identity, $ionicModal) {
     $rootScope.$on('OAuthException', function () {
-        if ($rootScope.login)
-            $rootScope.login();
-        else
-            $state.go('app.Welcome');
+        identity.destroy();
+        $rootScope.login();
     });
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {

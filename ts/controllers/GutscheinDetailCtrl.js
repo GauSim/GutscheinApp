@@ -5,18 +5,21 @@
     var app = angular.module('gutscheinapp.controllers.GutscheinDetailCtrl', []);
 
     app.controller('GutscheinDetailCtrl', function ($scope, $ionicModal, $ionicPopup, GutscheinService, $rootScope, GutscheinId, OpenFB, $state, identity) {
-        console.log(GutscheinId);
+        $scope.Headline = "Gutschein";
+        $scope.moment = moment;
 
         $scope.Gutschein = GutscheinService.getById(GutscheinId);
         if (!$scope.Gutschein)
             $state.go("app.MeineGutscheine");
 
-        $scope.goback = function () {
-            $state.go("app.MeineGutscheine");
-        };
-
         $scope.Valid = function (Gutschein) {
             return (Gutschein.AllwaysVaild || moment(Gutschein.ValidUntil) >= moment());
+        };
+        if (!$scope.Valid($scope.Gutschein))
+            $state.go("app.MeineGutscheine");
+
+        $scope.goback = function () {
+            $state.go("app.MeineGutscheine");
         };
 
         $scope.Entwerten = function () {
@@ -24,6 +27,7 @@
             // http://ionicframework.com/docs/api/service/$ionicPopup/
             function doit() {
                 if (identity.User.FacebookId) {
+                    alert("versuch Facebook");
                     poston_facebook();
                 }
 
@@ -48,12 +52,14 @@
         };
 
         var poston_facebook = function () {
+            //alert(identity.User.FacebookToken);
             var msg = {
-                message: "hi",
+                message: $scope.Gutschein.PostMessage,
                 link: "https://www.facebook.com/City.Friseur.Osnabrueck"
             };
             OpenFB.post('/me/feed', msg).success(function () {
                 var a = "This item has been shared on OpenFB";
+                alert("ok, ist auf der wall");
             }).error(function (data) {
                 alert(data.error.message);
             });

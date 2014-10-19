@@ -8,12 +8,12 @@ class Gutschein {
 
     Id:string;
 
-    ImageUrlSmall:string = "http://www.gausmann-media.de/kunden/GutscheinApp/demogutschein.jpg";
-    ImageUrlBig:string = "http://www.gausmann-media.de/kunden/GutscheinApp/demogutschein.jpg";
+    ImageUrlSmall:string = null;//"http://www.gausmann-media.de/kunden/GutscheinApp/demogutschein.jpg";
+    ImageUrlBig:string = null; //"http://www.gausmann-media.de/kunden/GutscheinApp/demogutschein.jpg";
 
-    Title:string = "Lorem ipsum dolor sit amet, consetetur sadipscing "; // 50 Zeichen
-    Owner:string = "Cube Media Gutschein"; // 30 Zeichen
-    Description:string = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et e"; // 500 Zeichen
+    Title:string = ""; // 50 Zeichen
+    Owner:string = "Qube-Media Gutschein"; // 30 Zeichen
+    Description:string = "";//"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et e"; // 500 Zeichen
 
     ValidUntil:string  // "2014-09-08T08:02:17-05:00" (ISO 8601)
     AllwaysVaild:boolean = true;

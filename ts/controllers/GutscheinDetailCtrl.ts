@@ -7,6 +7,8 @@ interface GutscheinDetailCtrl {
     postonfacebook();
     Valid(Gutschein:Gutschein): boolean
     Entwerten();
+    moment:any;
+    Headline:string;
 }
 
 (function () {
@@ -14,19 +16,24 @@ interface GutscheinDetailCtrl {
 
     app.controller('GutscheinDetailCtrl', function ($scope:GutscheinDetailCtrl, $ionicModal, $ionicPopup, GutscheinService:iGutscheinService, $rootScope, GutscheinId, OpenFB, $state, identity:iidentity) {
 
-        console.log(GutscheinId);
+        $scope.Headline = "Gutschein";
+        $scope.moment = moment;
 
         $scope.Gutschein = GutscheinService.getById(GutscheinId);
         if (!$scope.Gutschein)
+            $state.go("app.MeineGutscheine");
+
+
+        $scope.Valid = function (Gutschein:Gutschein) {
+            return (Gutschein.AllwaysVaild || moment(Gutschein.ValidUntil) >= moment());
+        }
+        if (!$scope.Valid($scope.Gutschein))
             $state.go("app.MeineGutscheine");
 
         $scope.goback = function () {
             $state.go("app.MeineGutscheine");
         }
 
-        $scope.Valid = function (Gutschein:Gutschein) {
-            return (Gutschein.AllwaysVaild || moment(Gutschein.ValidUntil) >= moment());
-        }
 
         $scope.Entwerten = function () {
             // Do FB Post
@@ -35,6 +42,8 @@ interface GutscheinDetailCtrl {
 
 
                 if (identity.User.FacebookId) {
+
+                    alert("versuch Facebook");
                     poston_facebook();
                 }
 
@@ -59,13 +68,17 @@ interface GutscheinDetailCtrl {
         };
 
         var poston_facebook = function () {
+
+            //alert(identity.User.FacebookToken);
+
             var msg = {
-                message: "hi",
+                message: $scope.Gutschein.PostMessage,
                 link: "https://www.facebook.com/City.Friseur.Osnabrueck"
             };
             OpenFB.post('/me/feed', msg)
                 .success(function () {
                     var a = "This item has been shared on OpenFB";
+                    alert("ok, ist auf der wall")
                 })
                 .error(function (data) {
                     alert(data.error.message);

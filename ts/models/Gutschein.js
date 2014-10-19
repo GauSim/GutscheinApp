@@ -1,11 +1,11 @@
 
 var Gutschein = (function () {
     function Gutschein(parameters) {
-        this.ImageUrlSmall = "http://www.gausmann-media.de/kunden/GutscheinApp/demogutschein.jpg";
-        this.ImageUrlBig = "http://www.gausmann-media.de/kunden/GutscheinApp/demogutschein.jpg";
-        this.Title = "Lorem ipsum dolor sit amet, consetetur sadipscing ";
-        this.Owner = "Cube Media Gutschein";
-        this.Description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et e";
+        this.ImageUrlSmall = null;
+        this.ImageUrlBig = null;
+        this.Title = "";
+        this.Owner = "Qube-Media Gutschein";
+        this.Description = "";
         this.AllwaysVaild = true;
         this.UseTimes = 1;
         this.PostMessage = "Ich habe den Gutschein benutzt.";

@@ -47,12 +47,17 @@
         };
 
         identity.destroy = function () {
-            OpenFB.revokePermissions();
-            OpenFB.logout();
-
             identity.IsAuthenticated = false;
             identity.User = new UserModel();
             StorageService.save(StorageService.keys.User, null);
+        };
+
+        identity.killSocialConnection = function () {
+            if (!identity.User.FacebookToken)
+                return;
+
+            OpenFB.revokePermissions();
+            OpenFB.logout();
         };
 
         identity.tryRestore = function () {

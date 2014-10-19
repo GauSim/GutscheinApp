@@ -1,4 +1,4 @@
-<ion-view title="Gutschein" hide-back-button="true">
+<ion-view title="{{Headline}}" hide-back-button="true">
     <ion-nav-buttons side="left">
         <button class="button button-icon icon ion-chevron-left"
                 ng-click="goback()"></button>
@@ -11,13 +11,19 @@
 
 
             <div class="list card" ng-click="Entwerten()">
-                <div class="item item-divider">
-                    <h2>{{Gutschein.Owner}}</h2>
-                </div>
+                <a class="item item-avatar" style="background-color: #f5f5f5;">
+                    <img ng-src="{{Gutschein.ImageUrlSmall}}">
 
-                <div class="item item-image text-center" style="background-color:black;">
-                    <img ng-if="Valid(Gutschein)" ng-src="{{Gutschein.ImageUrlSmall}}">
-                </div>
+                    <h2>
+                        {{Gutschein.Owner}}
+
+                    </h2>
+
+                    <p>
+                        <span ng-if="!Gutschein.AllwaysVaild" style="font-size: 9px; line-height: 7px;">{{moment(Gutschein.ValidUntil).format("dddd, MMMM Do YYYY, H:mm:ss");}}</span>
+                    </p>
+                </a>
+
                 <div class="item text-center">
                     <div class="padding-horizontal">
                         <button class="button button-assertive button-block" ng-click="deleteGutscheinListe()">
@@ -25,15 +31,27 @@
                         </button>
                     </div>
                 </div>
+                <div class="item item-image text-center" style="background-color:black;">
+                    <img ng-if="Valid(Gutschein)" ng-src="{{Gutschein.ImageUrlBig}}">
+                </div>
+
                 <div class="item item-text-wrap text-center">
                     <h2>{{Gutschein.Title}}</h2>
 
                     <p>{{Gutschein.Description}}</p>
+
                     <p>Gutschein Id: {{Gutschein.Id}}</p>
                 </div>
-                <a class="item assertive text-center" href="#">
-                    <span ng-if="!Gutschein.AllwaysVaild">{{ValidUntilDisplayText(Gutschein)}} {{Valid(Gutschein)}}</span>
-                    <span ng-if="Gutschein.AllwaysVaild"> Läuft nie ab.</span>
+                <a class="item">
+                    <div ng-if="!Gutschein.AllwaysVaild">
+                        <i class="fa fa-clock-o pull-left"
+                           style="font-size: 25px;margin-top: 9px;margin-right:10px; margin-bottom: 10px;"></i>
+                        <span style="font-size: 12px; line-height: 7px;">Läuft ab {{moment(Gutschein.ValidUntil).fromNow()}}.</span><br/>
+                        <span style="font-size: 9px; line-height: 7px;">{{moment(Gutschein.ValidUntil).format("dddd, MMMM Do YYYY, H:mm:ss");}}</span>
+                    </div>
+                    <div ng-if="Gutschein.AllwaysVaild">
+                        Läuft nie ab.
+                    </div>
                 </a>
             </div>
 
