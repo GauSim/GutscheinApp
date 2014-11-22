@@ -1,5 +1,10 @@
 /* Empty. Add your own CSS if you like */
 
+/* color overwirte */
+.bar.bar-energized{
+    background-color: #FF6600;
+}
+
 .welcome-background {
     background-image: url('../img/welomebg.jpg');
     background-position: top center;

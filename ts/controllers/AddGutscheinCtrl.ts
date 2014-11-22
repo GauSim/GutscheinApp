@@ -134,17 +134,24 @@ interface FB_Location {
             function tryScann() {
                 try {
                     Scanner.scan(function (obj) {
-                        QRCodeFactory.decode(obj.text).then(QRCodeFactory.getFromServer).then(function (result:Gutschein) {
-                            //alert(result.Title);
-                            $scope.GutscheinListe = GutscheinService.getListAll();
-                            GutscheinService.add(result);
-                            done();
-                            $state.go("app.MeineGutscheine");
+                        QRCodeFactory.decode(obj.text).then(
+                            function (Gutschein:Gutschein) {
 
-                        }, function (e) {
-                            console.log(e);
-                            done("Code konnte nicht erkannt");
-                        });
+                                QRCodeFactory.getFromServer(Gutschein)
+                                    .then(function (result:Gutschein) {
+                                        //alert(result.Title);
+                                        $scope.GutscheinListe = GutscheinService.getListAll();
+                                        GutscheinService.add(result);
+                                        done();
+                                        $state.go("app.MeineGutscheine");
+
+                                    });
+
+                            },
+                            function (e) {
+                                console.log(e);
+                                done("Code konnte nicht erkannt");
+                            });
                     }, function (error) {
                         console.log(error.error);
                         setTimeout(function () {

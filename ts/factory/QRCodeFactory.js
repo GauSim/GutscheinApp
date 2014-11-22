@@ -33,9 +33,18 @@
         self.decode = function (Input) {
             var q = $q.defer();
 
-            var obj = new Gutschein({});
+            if (Input.indexOf(";") === -1)
+                q.reject("decode fail");
+
+            if (Input.indexOf("->") === -1)
+                q.reject("decode fail");
+
+            if (Input.indexOf("Id") === -1)
+                q.reject("decode fail");
 
             try  {
+                var obj = new Gutschein({});
+
                 var Pairs = Input.split(";");
                 for (var i = 0; i < Pairs.length; i++) {
                     var KeyValue = Pairs[i].split("->");

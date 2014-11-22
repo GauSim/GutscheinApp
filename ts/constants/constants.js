@@ -16,14 +16,14 @@
     });
 
     app.constant('FACEBOOKSETTINGS', {
-        AppID: '797691880296264',
+        AppID: '1508890442721887',
         Scope: 'email,read_stream,publish_stream,publish_actions'
     });
 
     app.constant('APPCONFIG', {
-        Name: 'Gutschein App',
+        Name: 'QM Gutschein Scanner',
         PrivacyStatementUrl: 'http://www.gausmann-media.de',
-        SupportUrl: 'info@gausmann-media.de',
+        SupportUrl: 'qm-gutschein-scanner@gausmann-media.de',
         CopyrightInfo: 'by Gausmann-Media',
         CopyrightUrl: 'http://www.gausmann-media.de',
         CreatedBy: 'Simon Gausmann',
