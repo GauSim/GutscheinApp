@@ -14,7 +14,23 @@
     -o-background-size: cover;
     background-size: cover;
 }
-
+.applogo {
+    display: block;
+    max-width: 100px;
+    min-width: 100px;
+    min-height: 125px;
+    min-height: 125px;
+    margin:0 auto;
+    width: 100px;
+    height: 125px;
+    background-image: url('../img/AppLogo.png');
+    background-position: top center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 
 /* ------------------------ Listen Ansicht ---------------------------*/
 .Notice{

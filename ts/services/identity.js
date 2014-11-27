@@ -46,6 +46,22 @@
             return true;
         };
 
+        identity.createByGoogleUser = function (GoogleUser) {
+            identity.IsAuthenticated = true;
+
+            identity.User.Role = USER_ROLES.user;
+
+            identity.User.Email = GoogleUser.email;
+            identity.User.Firstname = GoogleUser.firstname;
+            identity.User.Lastname = GoogleUser.lastname;
+
+            identity.User.GoogleId = GoogleUser.id;
+
+            StorageService.save(StorageService.keys.User, identity.User);
+
+            return true;
+        };
+
         identity.destroy = function () {
             identity.IsAuthenticated = false;
             identity.User = new UserModel();

@@ -5,7 +5,8 @@
     var app = angular.module('gutscheinapp.controllers.AppCtrl', ['gutscheinapp.services.identity']);
 
 
-    app.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $state, identity:iidentity, $rootScope, OpenFB, FACEBOOKSETTINGS, APPCONFIG, EVENTS) {
+    app.controller('AppCtrl', function (
+        $scope, $ionicModal, $timeout, $state, identity:iidentity, $rootScope, OpenFB, FACEBOOKSETTINGS, APPCONFIG, EVENTS) {
 
         $rootScope.identity = identity;
         $rootScope.APPCONFIG = APPCONFIG;
@@ -35,17 +36,19 @@
             $rootScope.FrontEndErrorMsg = "";
 
             try {
-                OAuth.initialize('eRvbHpnoDZTB0zwIaZseLgVZfyQ');
+                OAuth.initialize(APPCONFIG.OauthIOKey);
                 OAuth.popup('google')
                     .done(function (result) {
                         //OAuth.io provider
                         console.log(result);
                         // do some stuff with result
-                        alert("ok");
-                        result.me().done(function (data) {
+
+                        result.me().done(function (GoogleUser) {
                             // do something with `data`, e.g. print data.name
-                            alert(data.name);
-                            console.log(data);
+                            //alert(JSON.stringify(GoogleUser));
+
+                            identity.createByGoogleUser(GoogleUser);
+                            onLoginDone();
                         });
                     })
                     .fail(function (error) {

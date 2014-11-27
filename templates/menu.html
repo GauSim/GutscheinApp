@@ -19,16 +19,16 @@
         <ion-content class="has-header">
             <ion-list>
                 <ion-item nav-clear menu-close ng-show="!identity.IsAuthenticated" href="#/app/Welcome">
-                    <i class="fa fa-yelp"></i>&nbsp;&nbsp;Welcome
+                    <i class="fa fa-yelp"></i>&nbsp;&nbsp;Willkommen
                 </ion-item>
                 <ion-item nav-clear menu-close ng-show="!identity.IsAuthenticated" ng-click="login()">
-                    <i class="fa fa-user"></i>&nbsp;&nbsp;Login
+                    <i class="fa fa-user"></i>&nbsp;&nbsp;Anmelden
                 </ion-item>
                 <ion-item nav-clear menu-close ng-show="identity.IsAuthenticated" href="#/app/MeineGutscheine">
                     <i class="fa fa-list"></i>&nbsp;&nbsp;Meine Gutscheine
                 </ion-item>
                 <ion-item nav-clear menu-close ng-show="identity.IsAuthenticated" href="#/app/AddGutscheine">
-                    <i class="fa fa-plus"></i>&nbsp;&nbsp;Gutscheine Hinzufügen
+                    <i class="fa fa-plus"></i>&nbsp;&nbsp;Gutschein Scannen
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/Settings">
                     <i class="fa fa-cog"></i>&nbsp;&nbsp;Einstellungen

@@ -21,13 +21,14 @@
     });
 
     app.constant('APPCONFIG', {
-        Name: 'QM Gutschein Scanner',
+        Name: 'QM-Gutschein Scanner',
         PrivacyStatementUrl: 'http://www.gausmann-media.de',
         SupportUrl: 'qm-gutschein-scanner@gausmann-media.de',
         CopyrightInfo: 'by Gausmann-Media',
         CopyrightUrl: 'http://www.gausmann-media.de',
         CreatedBy: 'Simon Gausmann',
-        Version: "V0.1.1.1"
+        Version: "V0.1.1.1",
+        OauthIOKey: "R1c6DOXLpufhm-6fNGfK6LYuYBg"
     });
 })();
 //# sourceMappingURL=constants.js.map
