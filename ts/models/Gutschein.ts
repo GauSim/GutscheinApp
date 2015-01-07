@@ -25,6 +25,8 @@ class Gutschein {
 
     constructor(parameters) {
 
+
+
         this.Id = parameters.Id;
 
         this.ImageUrlSmall = parameters.ImageUrlSmall ? parameters.ImageUrlSmall : this.ImageUrlSmall;

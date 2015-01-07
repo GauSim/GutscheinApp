@@ -14,9 +14,11 @@
             var q = $q.defer();
 
             // http://kunden.gausmann-media.de/GutscheinApp/gutschein.php?Id=999&AddDays=1
-            var url = "http://kunden.gausmann-media.de/GutscheinApp/gutschein.php?";
-            url += "Id=" + obj.Id;
-            url += "&AddDays=" + 0;
+            var url = "http://www.fredrickmundia.com/videos/?page_id=1078&voucher_id=" + obj.Id;
+
+            //var url = "http://kunden.gausmann-media.de/GutscheinApp/gutschein.php?";
+            //url += "Id=" + obj.Id;
+            //url += "&AddDays=" + 0;
             console.log(url);
 
             $http.get(url).success(function (RawGutschein, status, headers, config) {

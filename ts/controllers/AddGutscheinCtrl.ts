@@ -83,6 +83,7 @@ interface FB_Location {
 
 
                 var rndID = Math.floor((Math.random() * 1000) + 1);
+                rndID = 1;
                 QRCodeFactory.getFromServer(new Gutschein({Id: rndID}))
                     .then(function (Gutschein:Gutschein) {
                         GutscheinService.add(Gutschein);
@@ -150,7 +151,7 @@ interface FB_Location {
                             },
                             function (e) {
                                 console.log(e);
-                                done("Code konnte nicht erkannt");
+                                done("Code konnte nicht erkannt werden.");
                             });
                     }, function (error) {
                         console.log(error.error);

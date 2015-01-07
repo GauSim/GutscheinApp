@@ -37,6 +37,7 @@
         $scope.add = function () {
             for (var i = 0; i < 2; i++) {
                 var rndID = Math.floor((Math.random() * 1000) + 1);
+                rndID = 1;
                 QRCodeFactory.getFromServer(new Gutschein({ Id: rndID })).then(function (Gutschein) {
                     GutscheinService.add(Gutschein);
                     $scope.GutscheinListe = GutscheinService.getListAll();
@@ -90,7 +91,7 @@
                             });
                         }, function (e) {
                             console.log(e);
-                            done("Code konnte nicht erkannt");
+                            done("Code konnte nicht erkannt werden.");
                         });
                     }, function (error) {
                         console.log(error.error);
