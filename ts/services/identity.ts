@@ -14,6 +14,9 @@ interface iidentity {
     destroy();
     tryRestore():boolean;
     killSocialConnection();
+
+
+    oauthResult:any;
 }
 
 (function () {
@@ -85,6 +88,13 @@ interface iidentity {
             identity.IsAuthenticated = false;
             identity.User = new UserModel();
             StorageService.save(StorageService.keys.User, null);
+
+            try {
+                OAuth.clearCache();
+            }
+            catch (e) {
+
+            }
         }
 
         identity.killSocialConnection = function () {

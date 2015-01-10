@@ -5,14 +5,15 @@
     var app = angular.module('gutscheinapp.controllers.AppCtrl', ['gutscheinapp.services.identity']);
 
 
-    app.controller('AppCtrl', function (
-        $scope, $ionicModal, $timeout, $state, identity:iidentity, $rootScope, OpenFB, FACEBOOKSETTINGS, APPCONFIG, EVENTS) {
+    app.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $state, identity:iidentity, $rootScope, OpenFB, FACEBOOKSETTINGS, APPCONFIG, EVENTS) {
 
         $rootScope.identity = identity;
         $rootScope.APPCONFIG = APPCONFIG;
 
 
         // window.sessionStorage['fbtoken']
+
+
 
         function onLoginDone() {
             $scope.closeLogin();
@@ -36,8 +37,10 @@
             $rootScope.FrontEndErrorMsg = "";
 
             try {
-                OAuth.initialize(APPCONFIG.OauthIOKey);
-                OAuth.popup('google')
+                OAuth.initialize(APPCONFIG.OauthIOKey)
+                OAuth.popup('google_plus', {
+                    cache: true
+                })
                     .done(function (result) {
                         //OAuth.io provider
                         console.log(result);
@@ -76,26 +79,49 @@
 
 
             try {
-                OpenFB.login(FACEBOOKSETTINGS.Scope).then(
-                    function () {
-                        OpenFB.get('/me').success(function (FaceBookUser) {
-                            identity.createByFacebookUser(FaceBookUser);
-                            onLoginDone();
-                        });
-                    },
-                    function (e) {
-                        if (e && e.error) {
-                            $rootScope.FrontEndErrorMsg = e.error;
-                        }
-                        else {
-                            $rootScope.FrontEndErrorMsg = "Login ist fehlgeschlagen ...";
-                        }
+                OAuth.initialize(APPCONFIG.OauthIOKey)
+                OAuth.popup('facebook', {
+                     cache: true
+                }).done(function (result) {
+                    console.log(result)
+                    // do some stuff with result
+
+                    //alert(result.access_token);
+
+                    window.sessionStorage['fbtoken'] = result.access_token;
+
+                    result.me().done(function (FaceBookUser) {
+
+                        // alert(FaceBookUser.email);
+
+                        identity.createByFacebookUser(FaceBookUser);
+                        onLoginDone();
+                    }, function () {
+                        $rootScope.FrontEndErrorMsg = "Login ist fehlgeschlagen ...";
                     });
+                });
             }
             catch (e) {
                 $rootScope.FrontEndErrorMsg = "Login ist fehlgeschlagen ...";
             }
-
+            /*
+             try {
+             OpenFB.login(FACEBOOKSETTINGS.Scope).then(
+             function () {
+             OpenFB.get('/me').success(function (FaceBookUser) {
+             identity.createByFacebookUser(FaceBookUser);
+             onLoginDone();
+             });
+             },
+             function (e) {
+             if (e && e.error) {
+             $rootScope.FrontEndErrorMsg = e.error;
+             }
+             else {
+             $rootScope.FrontEndErrorMsg = "Login ist fehlgeschlagen ...";
+             }
+             });
+             }*/
 
         };
     });

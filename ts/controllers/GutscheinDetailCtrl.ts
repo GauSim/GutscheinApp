@@ -14,10 +14,11 @@ interface GutscheinDetailCtrl {
 (function () {
     var app = angular.module('gutscheinapp.controllers.GutscheinDetailCtrl', []);
 
-    app.controller('GutscheinDetailCtrl', function ($scope:GutscheinDetailCtrl, $ionicModal, $ionicPopup, GutscheinService:iGutscheinService, $rootScope, GutscheinId, OpenFB, $state, identity:iidentity) {
+    app.controller('GutscheinDetailCtrl', function ($scope:GutscheinDetailCtrl, APPCONFIG, $ionicModal, $ionicPopup, GutscheinService:iGutscheinService, $rootScope, GutscheinId, OpenFB, $state, identity:iidentity) {
 
         $scope.Headline = "Gutschein";
         $scope.moment = moment;
+
 
         $scope.Gutschein = GutscheinService.getById(GutscheinId);
         if (!$scope.Gutschein)
@@ -48,6 +49,7 @@ interface GutscheinDetailCtrl {
                 }
 
                 if (identity.User.GoogleId) {
+                    alert("versuch google");
                     poston_google();
                 }
 
@@ -71,23 +73,95 @@ interface GutscheinDetailCtrl {
 
             //alert(identity.User.FacebookToken);
 
+            var provider = 'facebook';
+
+
+            // ,
+            //
             var msg = {
-                message: $scope.Gutschein.PostMessage,
-                link: "https://www.facebook.com/City.Friseur.Osnabrueck"
+                message: $scope.Gutschein.PostMessage
+                //,link: "https://www.facebook.com/City.Friseur.Osnabrueck"
             };
-            OpenFB.post('/me/feed', msg)
-                .success(function () {
-                    var a = "This item has been shared on OpenFB";
-                    alert("ok, ist auf der wall")
+
+
+            var facebook = OAuth.create('facebook');
+            if (!facebook)
+                return;
+
+
+            facebook.post(
+                {
+                    url: '/me/feed',
+                    data: msg
                 })
-                .error(function (data) {
-                    alert(data.error.message);
+                .done(function (response) {
+                    //this will display the id of the message in the console
+                    //console.log(response.id);
+                    //alert("done" + response.id);
+                })
+                .fail(function (err) {
+                    //handle error with err
+                    //alert("err, post");
+                    //alert(JSON.stringify(err));
                 });
+
         };
 
         var poston_google = function () {
 
-            alert("Google API todo");
+            // https://www.googleapis.com/plus/v1/people/userId/moments/collection
+
+
+            var target = {
+                //kind: "plus#moment",
+                id: "target-id-1",
+                type: "http://schemas.google.com/AddActivity",
+                name: "Name",
+                //image:"",
+                description: "huhu"
+
+            };
+
+
+            var body2 = {
+                target: target,
+                type: "http://schemas.google.com/AddActivity"
+            };
+
+            var moment = {
+                "kind": "plus#moment",
+                "type": "http://schemas.google.com/CreateActivity",
+                "target": {
+                    "kind": "plus#itemScope",
+                    "id": "target-id-2",
+                    "type": "http://schema.org/CreativeWork",
+                    "name": "Test moment",
+                    "description": "This is a sample moment",
+                    "text": "samplpe g+ posting!"
+                }
+            }
+
+            var google_plus = OAuth.create('google_plus');
+            if (!google_plus)
+                return;
+
+            google_plus.post(
+                {
+                    url: "/people/me/moments/vault",
+                    data: moment
+                })
+                .done(function (response) {
+                    //this will display the id of the message in the console
+                    //console.log(response.id);
+                    alert("ok");
+                })
+                .fail(function (err) {
+                    //handle error with err
+                    //alert("err, post");
+                    //alert(JSON.stringify(err));
+                    // TODO:Fix this maaaan! i allways get 500!!
+                });
+
         }
 
 
