@@ -27,13 +27,12 @@
 
                     </h2>
 
-                    <p>
+                    <p style="display: none">
                         <span ng-if="!Gutschein.AllwaysVaild" style="font-size: 9px; line-height: 7px;">{{moment(Gutschein.ValidUntil).format("dddd, MMMM Do YYYY, H:mm:ss");}}</span>
                     </p>
                 </a>
 
-
-                <a ng-if="Gutschein.Title != ''" class="item item-text-wrap text-center">
+                <a ng-if="Gutschein.Title != ''" class="item item-image item-text-wrap text-center">
 
                     <img ng-src="{{Gutschein.ImageUrlBig}}">
 

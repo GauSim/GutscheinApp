@@ -79,17 +79,22 @@ interface FB_Location {
         $scope.add = function () {
 
 
-            for (var i = 0; i < 2; i++) {
+            var rndID = Math.floor((Math.random() * 1000) + 1);
+            //rndID = 14; //13;//12;//9;
 
 
-                var rndID = Math.floor((Math.random() * 1000) + 1);
-                rndID = 1;
-                QRCodeFactory.getFromServer(new Gutschein({Id: rndID}))
+            function testId(Id) {
+                QRCodeFactory.getFromServer(new Gutschein({Id: Id}))
                     .then(function (Gutschein:Gutschein) {
                         GutscheinService.add(Gutschein);
                         $scope.GutscheinListe = GutscheinService.getListAll();
                     });
             }
+
+            testId(9);
+            testId(12);
+            testId(13);
+            testId(14);
 
 
         }

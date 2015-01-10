@@ -37,8 +37,8 @@ angular.module('starter', [
                 //var $rootScope = $injector.get("$rootScope");
                 //$rootScope.addError({message:"Exception", reason:exception});
 
-                alert("Fehler.");
-                alert(exception);
+                console.log("Fehler.");
+                console.log(exception);
 
                 $delegate(exception, cause);
             };
