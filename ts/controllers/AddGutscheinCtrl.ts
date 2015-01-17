@@ -29,7 +29,7 @@ interface AddGutscheineCtrl {
     LocationSelect(item:FB_Location);
 
     $apply(func:any);
-    showAlert();
+    showAlert(msg:string);
 
 }
 interface FB_Location {
@@ -97,6 +97,16 @@ interface FB_Location {
             testId(14);
         }
 
+        $scope.showAlert = function (msg) {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Info',
+                template: msg
+            });
+            alertPopup.then(function (res) {
+                //console.log('Thank you for not eating my delicious ice cream cone');
+            });
+        };
+
 
         $scope.scan = function () {
 
@@ -130,15 +140,7 @@ interface FB_Location {
 
                 if (msg) {
                     // An alert dialog
-                    $scope.showAlert = function () {
-                        var alertPopup = $ionicPopup.alert({
-                            title: 'Info',
-                            template: msg
-                        });
-                        alertPopup.then(function (res) {
-                            console.log('Thank you for not eating my delicious ice cream cone');
-                        });
-                    };
+                    $scope.showAlert(msg);
                 }
 
                 $scope.modal.hide();

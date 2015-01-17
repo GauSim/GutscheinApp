@@ -51,6 +51,16 @@
             testId(14);
         };
 
+        $scope.showAlert = function (msg) {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Info',
+                template: msg
+            });
+            alertPopup.then(function (res) {
+                //console.log('Thank you for not eating my delicious ice cream cone');
+            });
+        };
+
         $scope.scan = function () {
             var Test = "Id->50;Title->Simons Test Gustschein";
 
@@ -79,15 +89,7 @@
 
                 if (msg) {
                     // An alert dialog
-                    $scope.showAlert = function () {
-                        var alertPopup = $ionicPopup.alert({
-                            title: 'Info',
-                            template: msg
-                        });
-                        alertPopup.then(function (res) {
-                            console.log('Thank you for not eating my delicious ice cream cone');
-                        });
-                    };
+                    $scope.showAlert(msg);
                 }
 
                 $scope.modal.hide();

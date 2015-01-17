@@ -13,20 +13,23 @@
                 <i class="fa fa-external-link pull-right"></i>
             </a>
 
-            <div ng-if="identity.IsAuthenticated && GutscheinListe.length > 0" class="item text-center">
-                <div class="padding-horizontal">
-                    <button class="button button-assertive button-block" ng-click="deleteGutscheinListe()">
-                        {{GutscheinListe.length}} Gespeicherte Gutscheine löschen
-                    </button>
-                </div>
-            </div>
             <div ng-if="identity.IsAuthenticated" class="item text-center">
                 <div class="padding-horizontal">
-                    <button class="button button-stable button-block" ng-click="logoff()">
+                    <button class="button button-energized button-outline button-block" ng-click="logoff()">
                         {{identity.User.Firstname}} Abmelden
                     </button>
                 </div>
             </div>
+
+            <div ng-if="identity.IsAuthenticated && GutscheinListe.length > 0" class="item text-center">
+                <div class="padding-horizontal">
+                    <button class="button button-assertive button-outline button-block"
+                            ng-click="deleteGutscheinListe()">
+                         App Speicher leeren ({{GutscheinListe.length}})
+                    </button>
+                </div>
+            </div>
+
             <div class="item item-divider">
                 Info
             </div>
