@@ -9,7 +9,7 @@
     app.controller('AddGutscheineCtrl2', function ($scope) {
     });
 
-    app.controller('AddGutscheineCtrl', function ($scope, $q, GutscheinService, DevicesLocationService, $ionicModal, QRCodeFactory, OpenFB, $state) {
+    app.controller('AddGutscheineCtrl', function ($scope, $q, GutscheinService, DevicesLocationService, $ionicModal, QRCodeFactory, OpenFB, $state, $ionicPopup) {
         var Scanner;
         $scope.ScanButton = false;
         if (window.hasOwnProperty('cordova')) {
@@ -25,7 +25,7 @@
                 } };
         }
 
-        $scope.Headline = "QR-Code";
+        $scope.Headline = "Einscannen";
         $scope.GutscheinListe = GutscheinService.getListAll();
         $ionicModal.fromTemplateUrl('templates/_LocationList.html', {
             scope: $scope,
@@ -77,8 +77,18 @@
             function done(msg) {
                 var q = $q.defer();
 
-                if (msg)
-                    alert(msg);
+                if (msg) {
+                    // An alert dialog
+                    $scope.showAlert = function () {
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Info',
+                            template: msg
+                        });
+                        alertPopup.then(function (res) {
+                            console.log('Thank you for not eating my delicious ice cream cone');
+                        });
+                    };
+                }
 
                 $scope.modal.hide();
                 q.resolve();

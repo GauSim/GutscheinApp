@@ -23,6 +23,5 @@
         $scope.openPrivacy = function () {
             window.open(APPCONFIG.CopyrightUrl, '_blank', 'location=no')
         }
-
     })
 })();

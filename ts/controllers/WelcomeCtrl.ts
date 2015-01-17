@@ -15,12 +15,14 @@
 
             //console.log(identity);
 
-            if ($rootScope.afterlogin) {
-
+            /*if ($rootScope.afterlogin) {
                 $state.go($rootScope.afterlogin.toState.name, $rootScope.afterlogin.toParams);
             } else {
-                $state.go('app.AddGutscheine', null, { inherit: false, relative: null });
-            }
+                $state.go('app.MeineGutscheine', null, { inherit: false, relative: null });
+            }*/
+
+            // Go to nach Login
+            $state.go('app.MeineGutscheine', null, { inherit: false, relative: null });
         }
 
 

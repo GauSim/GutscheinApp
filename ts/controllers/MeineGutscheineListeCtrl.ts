@@ -28,10 +28,6 @@ interface MeineGutscheineListeCtrl {
         $scope.moment = moment;
         $scope.MeineGutscheine = GutscheinService.getListValid();
 
-
-
-
-
         $scope.gotoDetail = function (Gutschein:Gutschein) {
             $state.go('app.GutscheinDetail', { GutscheinId: Gutschein.Id }, { inherit: true });
         }

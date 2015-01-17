@@ -83,8 +83,6 @@ angular.module('starter', [
             StorageService.save(StorageService.keys.User, null);
             StorageService.save(StorageService.keys.AppVersion, APPCONFIG.Version);
         }
-
-
     })
     .run(function (OpenFB, FACEBOOKSETTINGS) {
         // Facebook Factory init

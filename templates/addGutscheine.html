@@ -9,19 +9,26 @@
 
             <div class="item item-text-wrap text-center">
                 <i class="fa fa-qrcode padding-horizontal" style="font-size: 120px;"></i><br/>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l</p>
-                <button class="button button-positive" ng-click="scan()">
-                    QR-Code Einscannen
+
+                <p>
+                    Du hast eine Gutschein gefunden ? <br/>
+                    Drück auf den Einscannen Button und füge ihn zu deinen Gutschein hinzu.
+
+                </p>
+                <button class="button button-energized button-outline" ng-click="scan()">
+                    Einscannen
                 </button>
             </div>
 
 
-            <div class="item">
-                <div class="item item-text-wrap text-center">
-                    <button class="button button-positive" ng-click="add()">
-                        Demo ( {{GutscheinListe.length}})
-                    </button>
-                </div>
+            <div class="item item-text-wrap text-center">
+                <p>Demo:<br/>
+                    ( im Speicher: {{GutscheinListe.length}})
+                </p>
+                <button class="button button-energized button-outline" ng-click="add()">
+                   Demo-Data vom Server laden
+                </button>
+
             </div>
 
 
