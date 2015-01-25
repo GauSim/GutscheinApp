@@ -1,11 +1,10 @@
 /// <reference path="./models/Gutschein.ts"/>
 /// <reference path="./services/GutscheinService.ts"/>
 /// <reference path="./services/identity.ts"/>
-
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in AppCtrl.js
+// 'starter.controllers' is found in AppCtrl.js 
 angular.module('starter', [
     'ionic',
     'openfb',
@@ -30,7 +29,6 @@ angular.module('starter', [
             //$rootScope.addError({message:"Exception", reason:exception});
             console.log("Fehler.");
             console.log(exception);
-
             $delegate(exception, cause);
         };
     });
@@ -42,10 +40,7 @@ angular.module('starter', [
         // for form inputs)
         if (window.hasOwnProperty('cordova') && cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-
             $ionicPlatform.showStatusBar(false);
-            //var a = cordova.require("cordova/plugin/BarcodeScanner");
-            //var _OAuth = cordova.require("com.oauthio.plugins.oauthio.OAuth");
         }
         if (window.hasOwnProperty('StatusBar')) {
             // org.apache.cordova.statusbar required
@@ -55,7 +50,6 @@ angular.module('starter', [
 }).run(function (APPCONFIG, StorageService) {
     //StorageService.save(StorageService.keys.AppVersion,"V0.1");
     var LocalVersion = StorageService.get(StorageService.keys.AppVersion);
-
     if (LocalVersion != APPCONFIG.Version) {
         // Neue Version der APP
         // Localen User löschen
@@ -71,12 +65,10 @@ angular.module('starter', [
         scope: $rootScope
     }).then(function (modal) {
         $rootScope.modal = modal;
-
         // Open the login modal
         $rootScope.login = function () {
             $rootScope.modal.show();
         };
-
         // Triggered in the login modal to close it
         $rootScope.closeLogin = function () {
             $rootScope.modal.hide();
@@ -87,23 +79,18 @@ angular.module('starter', [
         identity.destroy();
         $rootScope.login();
     });
-
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
         // ignore Welcome Screen, when eingeloggt ...
         if (toState.name === 'app.Welcome' && identity.IsAuthenticated) {
             event.preventDefault();
         }
-
         if (toState.data && toState.data.authorizedRoles) {
             if (!identity.IsAuthenticated)
                 identity.tryRestore();
-
             if (!identity.IsAuthenticated || !identity.User.Role || (_.indexOf(toState.data.authorizedRoles, identity.User.Role) === -1)) {
                 // Stop!
                 event.preventDefault();
-
                 $rootScope.afterlogin = { toState: toState, toParams: toParams };
-
                 if ($rootScope.login)
                     $rootScope.login();
                 else

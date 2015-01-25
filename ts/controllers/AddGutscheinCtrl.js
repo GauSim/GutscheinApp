@@ -2,29 +2,27 @@
 /// <reference path="../services/GutscheinService.ts"/>
 /// <reference path="../services/DevicesLocationService.ts"/>
 /// <reference path="../factory/QRCodeFactory.ts"/>
-
 (function () {
     var app = angular.module('gutscheinapp.controllers.AddGutscheineCtrl', []);
-
     app.controller('AddGutscheineCtrl2', function ($scope) {
     });
-
     app.controller('AddGutscheineCtrl', function ($scope, $q, GutscheinService, DevicesLocationService, $ionicModal, QRCodeFactory, OpenFB, $state, $ionicPopup) {
         var Scanner;
         $scope.ScanButton = false;
         if (window.hasOwnProperty('cordova')) {
-            try  {
+            try {
                 Scanner = cordova.require("cordova/plugin/BarcodeScanner");
                 $scope.ScanButton = true;
-            } catch (e) {
+            }
+            catch (e) {
                 $scope.ScanButton = false;
             }
-        } else {
-            Scanner = { scan: function (ok, err) {
-                    err("plugin not found");
-                } };
         }
-
+        else {
+            Scanner = { scan: function (ok, err) {
+                err("plugin not found");
+            } };
+        }
         $scope.Headline = "Einscannen";
         $scope.GutscheinListe = GutscheinService.getListAll();
         $ionicModal.fromTemplateUrl('templates/_LocationList.html', {
@@ -33,10 +31,8 @@
         }).then(function (modal) {
             $scope.modal = modal;
         });
-
         $scope.add = function () {
             var rndID = Math.floor((Math.random() * 1000) + 1);
-
             //rndID = 14; //13;//12;//9;
             function testId(Id) {
                 QRCodeFactory.getFromServer(new Gutschein({ Id: Id })).then(function (Gutschein) {
@@ -44,13 +40,11 @@
                     $scope.GutscheinListe = GutscheinService.getListAll();
                 });
             }
-
             testId(9);
             testId(12);
             testId(13);
             testId(14);
         };
-
         $scope.showAlert = function (msg) {
             var alertPopup = $ionicPopup.alert({
                 title: 'Info',
@@ -60,44 +54,34 @@
                 //console.log('Thank you for not eating my delicious ice cream cone');
             });
         };
-
         $scope.scan = function () {
             var Test = "Id->50;Title->Simons Test Gustschein";
-
             function test() {
                 setTimeout(function () {
                     QRCodeFactory.decode(Test).then(function (Gutschein) {
                         console.log(Gutschein);
-
                         GutscheinService.add(Gutschein);
                         $scope.GutscheinListe = GutscheinService.getListAll();
-
                         console.log(QRCodeFactory.encode(Gutschein));
-
                         $scope.modal.hide();
                     }, function (error) {
                         alert(JSON.stringify(error));
                         console.log(error);
-
                         $scope.modal.hide();
                     });
                 }, 500);
             }
-
             function done(msg) {
                 var q = $q.defer();
-
                 if (msg) {
                     // An alert dialog
                     $scope.showAlert(msg);
                 }
-
                 $scope.modal.hide();
                 q.resolve();
             }
-
             function tryScann() {
-                try  {
+                try {
                     Scanner.scan(function (obj) {
                         QRCodeFactory.decode(obj.text).then(function (Gutschein) {
                             QRCodeFactory.getFromServer(Gutschein).then(function (result) {
@@ -117,17 +101,15 @@
                             done("Scanner konnte nicht gestartet werden.");
                         }, 500);
                     });
-                } catch (e) {
+                }
+                catch (e) {
                     done("Scanner konnte nicht gestartet werden.");
                 }
             }
-
             $scope.modal.show().then(tryScann);
         };
-
         $scope.selectedLocation = null;
         $scope.GetByLocationButton = false;
-
         $scope.getByLocation = function () {
             $scope.modal.show();
             $scope.GetByLocationButton = false;

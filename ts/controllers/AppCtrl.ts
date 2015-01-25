@@ -10,11 +10,6 @@
         $rootScope.identity = identity;
         $rootScope.APPCONFIG = APPCONFIG;
 
-
-        // window.sessionStorage['fbtoken']
-
-
-
         function onLoginDone() {
             $scope.closeLogin();
             $state.go('app.AddGutscheine', null, { inherit: false, relative: null })
@@ -23,7 +18,6 @@
         $rootScope.$on(EVENTS.LOGIN, function () {
             $state.go('app.AddGutscheine', null, { inherit: false, relative: null });
         });
-
 
         $rootScope.FrontEndErrorMsg = "";
 

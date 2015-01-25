@@ -24,7 +24,6 @@ interface GutscheinDetailCtrl {
         if (!$scope.Gutschein)
             $state.go("app.MeineGutscheine");
 
-
         $scope.Valid = function (Gutschein:Gutschein) {
             return (Gutschein.AllwaysVaild || moment(Gutschein.ValidUntil) >= moment());
         }

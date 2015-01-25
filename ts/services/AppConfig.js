@@ -1,6 +1,6 @@
 /**
-* Created by Simon on 05.10.14.
-*/
+ * Created by Simon on 05.10.14.
+ */
 /// <reference path="../app.ts"/>
 (function () {
     var app = angular.module('gutscheinapp.services.AppConfig', []);

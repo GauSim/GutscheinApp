@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="GausmannMedia.QMGutscheinScanner" version="1.0.3" xmlns="http://www.w3.org/ns/widgets"
+<widget id="GausmannMedia.QMGutscheinScanner" version="1.0.4" xmlns="http://www.w3.org/ns/widgets"
         xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>GutscheinScanner App</name>
+    <name>Gutschein Scanner</name>
     <description>
-        App kann Gutscheine per QR-Code einscannen, Speichern und Entwerten
+        App kann Qube-Media Gutscheine per QR-Code Einscannen, Speichern und Entwerten.
+        Einfach auf einem Qube-Media Screen einen Gutschein entdecken und mit dieser App einscannen.
     </description>
     <author email="Simon.Gausmann@Gausmann-Media.de" href="http://www.Gausmann-Media.de">
         Simon Gausmann / Gausmann Media

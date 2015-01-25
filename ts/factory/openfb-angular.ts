@@ -6,7 +6,7 @@
  * OpenFB allows you to login to Facebook and execute any Facebook Graph API request.
  * @author Christophe Coenraets @ccoenraets
  * @version 0.2
- */
+ */ 
 /// <reference path="../app.ts"/>
 
 angular.module('openfb', [])

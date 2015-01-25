@@ -1,10 +1,9 @@
 /**
-* Created by Simon on 04.10.14.
-*/
+ * Created by Simon on 04.10.14.
+ */
 /// <reference path="./app.ts"/>
 (function () {
     var app = angular.module('gutscheinapp.routes', []);
-
     app.config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
         $stateProvider.state('app', {
             url: "/app",
@@ -73,7 +72,6 @@
                 }
             }
         });
-
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/Welcome');
     });

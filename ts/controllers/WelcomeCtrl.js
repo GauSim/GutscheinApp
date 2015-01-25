@@ -1,6 +1,6 @@
 /**
-* Created by Simon on 04.10.14.
-*/
+ * Created by Simon on 04.10.14.
+ */
 /// <reference path="../app.ts"/>
 (function () {
     var app = angular.module('gutscheinapp.controllers.WelcomeCtrl', []);
@@ -8,23 +8,19 @@
         // Try Autologin
         if (identity.tryRestore()) {
             console.log('autologin ...');
-
             //console.log(identity);
             /*if ($rootScope.afterlogin) {
-            $state.go($rootScope.afterlogin.toState.name, $rootScope.afterlogin.toParams);
+                $state.go($rootScope.afterlogin.toState.name, $rootScope.afterlogin.toParams);
             } else {
-            $state.go('app.MeineGutscheine', null, { inherit: false, relative: null });
+                $state.go('app.MeineGutscheine', null, { inherit: false, relative: null });
             }*/
             // Go to nach Login
             $state.go('app.MeineGutscheine', null, { inherit: false, relative: null });
         }
-
         $scope.Headline = "Willkommen";
-
         $scope.nextSlide = function () {
             $ionicSlideBoxDelegate.next();
         };
-
         $scope.showNextButton = true;
         $scope.slideHasChanged = function (index) {
             if (index == 2)

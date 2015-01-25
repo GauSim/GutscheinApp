@@ -1,6 +1,6 @@
 /**
-* Created by Simon on 04.10.14.
-*/
+ * Created by Simon on 04.10.14.
+ */
 /// <reference path="../app.ts"/>
 (function () {
     var app = angular.module('gutscheinapp.services.StorageService', []);
@@ -15,13 +15,15 @@
                 var data = localStorage.getItem(_key);
                 if (data == null) {
                     return null;
-                } else
+                }
+                else
                     return JSON.parse(data);
             },
             save: function (_key, data) {
-                try  {
+                try {
                     localStorage.setItem(_key, JSON.stringify(data));
-                } catch (e) {
+                }
+                catch (e) {
                     console.log('Error saving to storage.');
                     throw e;
                 }

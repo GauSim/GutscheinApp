@@ -4,19 +4,43 @@
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/ts/app.js" />
         <item url="file://$PROJECT_DIR$/ts/models/UserModel.js" />
+        <item url="file://$PROJECT_DIR$/ts/controllers/SettingsCtrl.js" />
+        <item url="file://$PROJECT_DIR$/ts/controllers/WelcomeCtrl.js" />
+        <item url="file://$PROJECT_DIR$/ts/models/Gutschein.js" />
+        <item url="file://$PROJECT_DIR$/ts/services/DevicesLocationService.js" />
+        <item url="file://$PROJECT_DIR$/ts/services/StorageService.js" />
+        <item url="file://$PROJECT_DIR$/ts/services/AppConfig.js" />
+        <item url="file://$PROJECT_DIR$/ts/controllers/GutscheinDetailCtrl.js" />
         <item url="file://$PROJECT_DIR$/ts/services/GutscheinService.js" />
         <item url="file://$PROJECT_DIR$/ts/services/identity.js" />
-        <item url="file://$PROJECT_DIR$/ts/models/Gutschein.js" />
+        <item url="file://$PROJECT_DIR$/ts/factory/openfb-angular.js" />
+        <item url="file://$PROJECT_DIR$/ts/controllers/AddGutscheinCtrl.js" />
         <item url="file://$PROJECT_DIR$/ts/routes.js" />
+        <item url="file://$PROJECT_DIR$/ts/controllers/AppCtrl.js" />
+        <item url="file://$PROJECT_DIR$/ts/factory/QRCodeFactory.js" />
+        <item url="file://$PROJECT_DIR$/ts/controllers/MeineGutscheineListeCtrl.js" />
+        <item url="file://$PROJECT_DIR$/ts/factory/GoogleplusFactory.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/ts/app.js" />
       <root url="file://$PROJECT_DIR$/ts/models/UserModel.js" />
-      <root url="file://$PROJECT_DIR$/ts/services/GutscheinService.js" />
+      <root url="file://$PROJECT_DIR$/ts/controllers/SettingsCtrl.js" />
+      <root url="file://$PROJECT_DIR$/ts/controllers/WelcomeCtrl.js" />
       <root url="file://$PROJECT_DIR$/ts/models/Gutschein.js" />
+      <root url="file://$PROJECT_DIR$/ts/services/DevicesLocationService.js" />
+      <root url="file://$PROJECT_DIR$/ts/services/StorageService.js" />
+      <root url="file://$PROJECT_DIR$/ts/services/AppConfig.js" />
+      <root url="file://$PROJECT_DIR$/ts/controllers/GutscheinDetailCtrl.js" />
+      <root url="file://$PROJECT_DIR$/ts/services/GutscheinService.js" />
       <root url="file://$PROJECT_DIR$/ts/services/identity.js" />
       <root url="file://$PROJECT_DIR$/ts/routes.js" />
+      <root url="file://$PROJECT_DIR$/ts/controllers/AddGutscheinCtrl.js" />
+      <root url="file://$PROJECT_DIR$/ts/factory/openfb-angular.js" />
+      <root url="file://$PROJECT_DIR$/ts/controllers/AppCtrl.js" />
+      <root url="file://$PROJECT_DIR$/ts/factory/QRCodeFactory.js" />
+      <root url="file://$PROJECT_DIR$/ts/controllers/MeineGutscheineListeCtrl.js" />
+      <root url="file://$PROJECT_DIR$/ts/factory/GoogleplusFactory.js" />
     </CLASSES>
     <SOURCES />
   </library>
