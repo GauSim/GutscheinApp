@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/ts/app.js" />
+        <item url="file://$PROJECT_DIR$/ts/models/UserModel.js" />
+        <item url="file://$PROJECT_DIR$/ts/services/GutscheinService.js" />
+        <item url="file://$PROJECT_DIR$/ts/services/identity.js" />
+        <item url="file://$PROJECT_DIR$/ts/models/Gutschein.js" />
+        <item url="file://$PROJECT_DIR$/ts/routes.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/ts/app.js" />
+      <root url="file://$PROJECT_DIR$/ts/models/UserModel.js" />
+      <root url="file://$PROJECT_DIR$/ts/services/GutscheinService.js" />
+      <root url="file://$PROJECT_DIR$/ts/models/Gutschein.js" />
+      <root url="file://$PROJECT_DIR$/ts/services/identity.js" />
+      <root url="file://$PROJECT_DIR$/ts/routes.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
