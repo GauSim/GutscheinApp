@@ -43,12 +43,12 @@ interface GutscheinDetailCtrl {
 
                 if (identity.User.FacebookId) {
 
-                    alert("versuch Facebook");
+                    //alert("versuch Facebook");
                     poston_facebook();
                 }
 
                 if (identity.User.GoogleId) {
-                    alert("versuch google");
+                    //alert("versuch google");
                     poston_google();
                 }
 
@@ -152,7 +152,7 @@ interface GutscheinDetailCtrl {
                 .done(function (response) {
                     //this will display the id of the message in the console
                     //console.log(response.id);
-                    alert("ok");
+                    //alert("ok");
                 })
                 .fail(function (err) {
                     //handle error with err
